@@ -236,6 +236,11 @@ var USDBRL;
 var USDGBP;
 var USDJPY;
 var USDKRW;
+var Real;
+var Pound;
+var Euro;
+var Yen;
+var Won;
 // currencyExchange is the function that get currenty currency
 function currencyExchange(){
    console.log("currencyExchange called");
@@ -278,57 +283,119 @@ function currencyExchange(){
        
        
        //fill the field ammount in dolar with one dolar.
-         document.getElementById('numberOne').value = USDUSD; 
+         document.getElementById('AmmountMoney').value = USDUSD; 
 
          calcT();
-
+         Real =  USDUSD / USDBRL;
+         Pound = USDUSD / USDGBP;
+         Euro = USDUSD / USDEUR;
+         Yen = USDUSD / USDJPY;
+         Won = USDUSD / USDKRW;
     }
 
 }
-var firstNumber; 
+var AmmountMoney; 
 var CurrencySelection;
+var FromCurrencySelection;
+var FromCurrencyToDollar;
 function calcT(){
     console.log("calcT called");
-    firstNumber = document.getElementById('numberOne').value; 
-    firstNumber = parseInt(firstNumber);
+    AmmountMoney = document.getElementById('AmmountMoney').value; 
+    AmmountMoney = parseInt(AmmountMoney);
   
+    //first field selection
+    FromCurrencySelection = document.getElementById('FromCurrencySelection').value;
+    
+    switch(FromCurrencySelection){
+        case "Dollar":
+            FromCurrencyToDollar = USDUSD;
 
-    CurrencySelection = document.getElementById('CurrencySelection').value;
-   
-    switch(CurrencySelection){
+        break;
+
         case "Reais":
-            CurrencySelection = USDBRL;
-
-            console.log("reais "+USDBRL);
+            FromCurrencyToDollar = (AmmountMoney * Real);
+            console.log("reais "+ FromCurrencyToDollar);
 
         break;
         
         case "Pound":
-            CurrencySelection = USDGBP;
+        
+// ((ammount * selector um(ex: real) * selector dois(ex: pound)
+                //valor br in dollar entao dollar in pound
+            FromCurrencySelection = USDGBP;
             console.log("Pound "+USDGBP);
 
         break;
         
         case "Euro":
-            CurrencySelection = USDEUR;
+            FromCurrencySelection = USDEUR;
             console.log("euro "+USDEUR);
+
         break;
         
         case "Yen":
-            CurrencySelection = USDJPY;
+        FromCurrencySelection = USDJPY;
             console.log("japonese "+USDJPY);
 
         break;
         
         case "Won":            
-            CurrencySelection = USDKRW;
+            FromCurrencySelection = USDKRW;
             console.log("Korean Won "+USDKRW);
 
         break;
     }
 
-    document.getElementById('numberTwo').value = firstNumber * CurrencySelection ;
-    console.log("first number  certo?"+firstNumber +"CurrencySelection"+CurrencySelection)
+    //second currency selector
+    CurrencySelection = document.getElementById('CurrencySelection').value;
+
+    switch(CurrencySelection){
+        case "Dollar":
+            CurrencySelection = USDUSD;
+            // console.log("Dollar "+USDUSD);
+
+         break;
+
+        case "Reais":
+            // CurrencySelection = USDBRL;
+            // console.log("reais "+USDBRL);
+            CurrencySelection = Real;
+
+        break;
+        
+        case "Pound":
+            // CurrencySelection = USDGBP;
+            console.log("Pound "+USDGBP);
+            CurrencySelection = Pound;
+
+        break;
+        
+        case "Euro":
+            // CurrencySelection = USDEUR;
+            console.log("euro "+USDEUR);
+            CurrencySelection = Euro;
+
+        break;
+        
+        case "Yen":
+            // CurrencySelection = USDJPY;
+            console.log("japonese "+USDJPY);
+            CurrencySelection = Yen;
+
+        break;
+        
+        case "Won":            
+            // CurrencySelection = USDKRW;
+            console.log("Korean Won "+USDKRW);
+            CurrencySelection = Won;
+
+        break;
+    }
+
+    // ((ammount * selector um(ex: real) * selector dois(ex: pound)
+
+    document.getElementById('numberTwo').value = ((FromCurrencyToDollar) * CurrencySelection) ;
+    console.log("first number  certo?"+AmmountMoney +"CurrencySelection"+CurrencySelection)
     
 }
 

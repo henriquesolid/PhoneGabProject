@@ -76,12 +76,25 @@
                             <!-- a special div for a form -->    
                             <!-- start currency converter -->
                        
-                            <h1>Currency Exchange</h1>
+                            <h2>Currency Exchange</h2>
                             <form>
                                 <div class="form-group">
-                                  <label for="formGroupExampleInput">Ammount in Dollar</label>
-                                  <input oninput="calcT()" onchange="calcT()" type="number" id="numberOne" class="form-control">
+                                <!-- first currency field -->
+
+                                Ammount in
+                                <div class="col">
+                                        <select oninput="calcT()" onchange="calcT()" class="form-control form-control-sm" id="FromCurrencySelection" style="width:30%;">
+                                                <option value="Dollar">Dollar</option>
+                                                <option value="Reais">Reais</option>
+                                                <option value="Pound">Pound</option>
+                                                <option value="Euro">Euro</option>
+                                                <option value="Yen">Yen</option>
+                                                <option value="Won">Korean won</option>
+                                            </select>
                                 </div>
+                                  <input oninput="calcT()" onchange="calcT()" type="number" id="AmmountMoney" class="form-control">
+                                </div>
+                                
                                 <div class="form-group">
                                         <div class="row">
                                                 <div class="col align-self-start">
