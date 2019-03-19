@@ -1,0 +1,159 @@
+<head>
+
+</head>
+
+<body>
+
+    hello world
+
+    <input type="number" id="numberOne"> </input>
+    <input type="number" id="numberTwo"> </input>
+    
+    <button onclick="add()"> Add up! </button>
+    <button onclick="sustraction()"> Sustract! </button>
+    <button onclick="multiplication()"> Multiply! </button>
+    <button onclick="division()"> Divide! </button>
+
+    <div id="result"> </div>
+
+    <div id="myDiv"></div>
+
+    <!-- Importing the jQuery library from the CDN from Google -->    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> 
+
+    <script>
+		
+        // I can access elements in my HTML secction using plain JS, or the shorter
+        // way with jQuery
+        document.getElementById('myDiv').innerHTML = "Plain JavaScript is better";
+        // Remember that my #-sing indicates that I'm selecting by id
+        $("#myDiv").text("Time to learn jQuery");
+
+        // Self invoked function
+        (() => {
+            console.log("Hiya!!");
+        })();
+
+        // Variable declaration
+        // Because the live outside any function
+        // all functions can access them
+        var numberOne;
+        var numberTwo;
+        var result;
+
+        function getValues(){
+            // Both lines doing the same thing
+            numberOne = $("#numberOne").val();
+            numberTwo = document.getElementById('numberTwo').value;
+            numberOne = parseInt(numberOne);
+            numberTwo = parseInt(numberTwo);
+        }
+
+        function add(){
+            getValues();
+            result = numberOne + numberTwo;
+            displayResult();
+        }
+
+        function sustraction(){
+            getValues();            
+            result = numberOne - numberTwo;
+            displayResult();
+        }
+
+        // Another way to define a function
+        var multiplication = function(){
+            getValues();
+            result = numberOne * numberTwo;
+            displayResult();
+        }
+
+        // And another
+        var division = () => {
+            getValues();
+            result = numberOne / numberTwo;
+            displayResult();
+        }
+
+        function displayResult(){
+            document.getElementById('result').innerHTML = result;
+        }
+
+        // In JavaScript we can pass function around as attributes
+        // thus, a function can receive another function and run
+        // it internally
+        function greeting(){
+            return "hello";
+        }
+
+        greeting(); // Does not print anything, because it only returns a string
+
+        // But this guy will print things
+        function printing(fcn){
+            var text = fcn();
+            console.log(text);
+
+        }
+
+        printing(greeting);
+
+        // Arrays -- Similar to Array lists in Java
+        var breeds = ["Chiuaua", "Labrador", "Great Danish"];
+
+        // we can access elements there by index
+        console.log(breeds[0]);
+        console.log(breeds.length);
+
+        // we can add more elements
+        breeds.push("Pitbull");
+        console.log(breeds[3]);
+
+        // JSON - JavaScript Object Notation
+        var personOne = {
+            name : "Amilcar",
+            surname : "Aponte",
+            age : 18,
+        }
+
+        // We can access the attributes using a dot
+        console.log(personOne.name);
+
+        // I can also pass the objects around
+        function people(person){
+            console.log(person.name);
+            console.log(person.surname);
+            console.log(person.age);
+        }
+
+        people(personOne);
+
+        // And we can combine with arrays
+        var personTwo = {
+            name : "Marissa",
+            surname : "Smith",
+            age : 32,
+            breeds : breeds
+        }
+
+        console.log(personTwo.breeds[0]);
+
+        function message(){
+            alert("it is hidden");
+        }
+
+        // Adding an animation with jQuery, and using a
+        // callback function. When the hiding part finishes
+        // the function message gets called
+        $("#myDiv").hide(5000, message);
+
+
+
+
+
+
+    </script>
+
+    
+   
+
+</body>
