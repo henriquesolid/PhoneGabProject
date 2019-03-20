@@ -47,11 +47,19 @@ $$(document).on('pageInit', '.page[data-page="about"]', function (e) {
 })
 
 
-function shake(){
-    navigator.vibrate(1000);
-     console.log("shaking working!");
-}
 
+// starting device accelaration/motion
+
+// THIS IS THE FUNCTION THAT WILL READ THE ACCELEROMETER
+var watchID = null;
+function startWatch(){
+
+    // Notice that the function takes two callbacks (accCallback and onError) and
+    // a JSON object (options)
+    watchID = navigator.accelerometer.watchAcceleration(accCallback, onError, options); 
+    // console.log("startwatch function started");
+
+}
 
 // accCallback. This is the function in charge of 
 // displayiing the acceleration on the front end
@@ -77,34 +85,29 @@ function onError(msg){
 var options = {
     frequency: 3000
 }
+// end device accelaration/motion
 
-// THIS IS THE FUNCTION THAT WILL READ THE ACCELEROMETER
-var watchID = null;
-function startWatch(){
 
-    // Notice that the function takes two callbacks (accCallback and onError) and
-    // a JSON object (options)
-    watchID = navigator.accelerometer.watchAcceleration(accCallback, onError, options); 
-    // console.log("startwatch function started");
 
-}
 
 function getLocation(){
-    navigator.geolocation.getCurrentPosition(geoCallback, onError, displayWeather);
+    navigator.geolocation.getCurrentPosition(geoCallback, onError);
      console.log("getLocation called"); 
 }
-
+var lat;
+var lon;
 function geoCallback(position){
      console.log("geoCallback called");
-    var lat =   position.coords.latitude;
-    var lon =  position.coords.longitude;
+    lat =   position.coords.latitude;
+    lon =  position.coords.longitude;
+    
   
-    onvrdisplaypresentchange(lat, lon);
-    refreshMap(lat, lon);
-    displayWeather(lat, lon);
-    printFlag(lat, lon);
+    opencageAPI();
+    // refreshMap();
+    displayWeather();
+    printFlag();
     currencyExchange();
-    nearestAirport(lat, lon);
+    nearestAirport();
 }
 
 function initMap() {
@@ -126,7 +129,9 @@ function initMap() {
 
    }
 
-function refreshMap(lat, lon){
+function refreshMap(){
+    console.log("refreshMap called ");
+    console.log("lat " + lat + "long" + lon);
     var point = {lat: lat, lng: lon};
 
     var map = new
@@ -141,7 +146,7 @@ function refreshMap(lat, lon){
     });
 }
 
-function home(lat, lon){
+function home(){
     var home = {lat: 53.318627, lng: -6.288998};
      var map = new
      google.maps.Map(document.getElementById('map'),
@@ -156,12 +161,12 @@ function home(lat, lon){
   
 }
 
-//onvrdisplaypresentchange is the function that get city, currency and country
+//opencageAPI is the function that get city, currency and country
 
 var currency;
 var welcome;
-function onvrdisplaypresentchange(lat, lon){
-     console.log("onvrdisplaypresentchange called");
+function opencageAPI(){
+     console.log("opencageAPI called");
     var http = new XMLHttpRequest();
     // const url = 'https://api.opencagedata.com/geocode/v1/json?q=53.3458+-6.2575&key=9614ccc2a3db467aa291f7aaea02676c';
     const url = 'https://api.opencagedata.com/geocode/v1/json?q='+lat+'+'+lon+'&key=9614ccc2a3db467aa291f7aaea02676c';
@@ -192,7 +197,7 @@ function onvrdisplaypresentchange(lat, lon){
 }
 
 //displayWeather is the function that get the weather
-function displayWeather(lat, lon){
+function displayWeather(){
     // console.log("displayWeather called");
     var http2 = new XMLHttpRequest();
 //  const url = 'http://api.openweathermap.org/data/2.5/weather?lat=35&lon=139&units=metric&appid=c161f2e8363f6ef8be3d9cc89baf322e';
@@ -220,7 +225,7 @@ function displayWeather(lat, lon){
         
 
 }
-function printFlag(lat, lon){
+function printFlag(){
     // console.log("print flag");
     // console.log("printing longitude");
     // console.log(lon);
@@ -259,12 +264,18 @@ function currencyExchange(){
 
 //READY THE HTTP REQUEST
     httpCurrencyExchange.onreadystatechange = (e) => {
+        if (httpCurrencyExchange.readyState == 4 && httpCurrencyExchange.status == 200) {
+            // console.log("if working started");
+           
+         
         //STORE IN A VARIABLE THE HTTP RESPONSE
         var responseCurrencyExchange = httpCurrencyExchange.responseText;
 
         //TRANSLTE THE RESPONSE IN JSON
         var responseCurrencyExchangeJson = JSON.parse(responseCurrencyExchange);
-        //    console.log(responseCurrencyExchangeJson);
+        // console.log(responseCurrencyExchange);
+        // console.log(responseCurrencyExchangeJson);
+
 
         //CREATE A VARIABLE WITH DOLLAT TO EURO, FROM THE JSON ANSWER
         //the .toprecision makes it with the number of caracter, example euro we need just the first tree digits.
@@ -285,6 +296,9 @@ function currencyExchange(){
          Euro = USDUSD / USDEUR;
          Yen = USDUSD / USDJPY;
          Won = USDUSD / USDKRW;
+    }else {
+        // console.log("if else called");
+     }
     }
 
 }
@@ -372,40 +386,57 @@ function calcT(){
 
 //end currency function
 
+var ipAddress;
+var airportCode;
+var airportName;
+
 // nearest airport information
 //nearestAirport is the function that get the weather
-function nearestAirport(lat, lon){
-     console.log("nearestAirport called");
-     console.log("lat " +lat + " long " + lon);
-    var httpAirport = new XMLHttpRequest();
+function nearestAirport(){
+    //  console.log("nearestAirport called");
+    //  console.log("lat " +lat + " long " + lon);
+     var httpAirport = new XMLHttpRequest();
     // console.log("http request " + http);
-  const url = 'https://iatacodes.org/api/v6/nearby?api_key=e6d5fae9-f7b9-4d1a-a219-08a0a5447427&lat=53.3458902&lng=-6.2575&distance=100';
-    // const url = 'https://iatacodes.org/api/v6/nearby?api_key=e6d5fae9-f7b9-4d1a-a219-08a0a5447427&lat='+lat+'&'+'lng='+lon+'&distance=100';
-    console.log(url)
+    //const url = 'http://iatacodes.org/api/v6/nearby?api_key=e6d5fae9-f7b9-4d1a-a219-08a0a5447427&lat=53.3458902&lng=-6.2575&distance=100';
+     const url = 'http://iatacodes.org/api/v6/nearby?api_key=e6d5fae9-f7b9-4d1a-a219-08a0a5447427&lat='+lat+'&'+'lng='+lon+'&distance=100';
+    // console.log(url)
     httpAirport.open("GET", url);
     httpAirport.send();
-
-    httpAirport.onreadystatechange = (e) => {
-        if (this.readyState == 4 && this.status == 200) {
+// console.log("vai poha");
+// console.log(httpAirport);
+// console.log("vai poha 2");
+    httpAirport.onreadystatechange = (e) => {     
+        if (httpAirport.readyState == 1 && httpAirport.status == 200) {
             var certo = "funcionou";
-            document.getElementById("airport").innerHTML = certo;
+            console.log("deu certo");
 
-         }else {
+        }else {
             var errado = "oi";
-            document.getElementById("airport").innerHTML = errado;
+            console.log("deu errado");
  
-         }
+        }  
+
         var responseAirport = httpAirport.responseText;
-        //var responseAirport = JSON.parse(responseAirport);
-         console.log("below the airport information");
-         console.log(responseAirport);
+        // console.log("befor text");
+        // console.log(responseAirport);
+        responseAirport = JSON.parse(responseAirport);
+        //  console.log("below the responseAirport");
+        //    console.log(responseAirport);
 
+        airportCode =  responseAirport.response[0].code;
+        airportName =  responseAirport.response[0].name;
+        ipAddress   =  responseAirport.request.client.ip;
+
+        var airport = "The nearest airport is " + airportCode + " " + airportName + ".";
        
-        
-
-        // var htmlWeather = "You are in "+cityName + "<br><b> " + temperature + "&#176;</b> degree<br> " + "Humidity: " +humidity+ "<br>Windy: "+WindSpeed+" km/h";
-        //  document.getElementById('displayWeather').innerHTML = htmlWeather; 
+        document.getElementById('airport').innerHTML = airport; 
 
         } 
 }
 // end nearest airport information
+
+function shake(){
+    navigator.vibrate(1000);
+     console.log("shaking working!");
+     refreshMap();
+}
