@@ -43,7 +43,7 @@
     <!-- Left panel with reveal effect-->
     <div class="panel panel-left panel-reveal">
         <div class="content-block">
-            <p>Left panel content goes here</p>
+            <p>Visited places</p>
         </div>
     </div>
 
@@ -55,7 +55,7 @@
             <div class="navbar">
                 <div class="navbar-inner">
                     <!-- We need cool sliding animation on title element, so we have additional "sliding" class -->
-                    <div class="center sliding">Awesome App</div>
+                    <div class="" id="welcome"></div>
                     <div class="right">
                         <!--
                           Right link contains only icon - additional "icon-only" class
@@ -72,66 +72,62 @@
                     <!-- Scrollable page content -->
                     <div class="page-content">
                         <div class="content-block">
+                            <div id="phoneCall">phoneCall</div>
+                            <div id="displayWeather">displaying Weather</div><br>
+                            <div id="airport">airport</div>
 
-                            <!-- a special div for a form -->    
+                            <!-- <div id="accelerometer"></div> -->
+                           
                             <!-- start currency converter -->
-                       
-                            <h2>Currency Exchange</h2>
+                            <div id="localCurrency"></div>
                             <form>
-                                <div class="form-group">
-                                <!-- first currency field -->
+     <div class="form-group">
+     <!-- first currency field -->
 
-                                Ammount in
-                                <div class="col">
-                                        <select oninput="calcT()" onchange="calcT()" class="form-control form-control-sm" id="FromCurrencySelection" style="width:30%;">
-                                                <option value="Dollar">Dollar</option>
-                                                <option value="Reais">Reais</option>
-                                                <option value="Pound">Pound</option>
-                                                <option value="Euro">Euro</option>
-                                                <option value="Yen">Yen</option>
-                                                <option value="Won">Korean won</option>
-                                            </select>
-                                </div>
-                                  <input oninput="calcT()" onchange="calcT()" type="number" id="AmmountMoney" class="form-control">
-                                </div>
-                                
-                                <div class="form-group">
-                                        <div class="row">
-                                                <div class="col align-self-start">
-                                                <!-- first currency field -->
+     Ammount in
+     <div class="col">
+             <select oninput="calcT()" onchange="calcT()" class="form-control form-control-sm" id="FromCurrencySelection" style="width:30%;">
+                     <option value="Dollar">Dollar</option>
+                     <option value="Reais">Reais</option>
+                     <option value="Pound">Pound</option>
+                     <option value="Euro">Euro</option>
+                     <option value="Yen">Yen</option>
+                     <option value="Won">Korean won</option>
+                 </select>
+     </div>
+       <input oninput="calcT()" onchange="calcT()" type="number" id="AmmountMoney" class="form-control">
+     </div>
+     <div class="form-group">
+             <div class="row">
+                     <div class="col align-self-start">
+                     <!-- first currency field -->
 
-                                                        Ammount in
-                                                </div>
-                                                <div class="col align-self-start">
-                                                        <select oninput="calcT()" onchange="calcT()" class="form-control form-control-sm" id="CurrencySelection" style="width:30%;">
-                                                                <option value="Reais">Reais</option>
-                                                                <option value="Pound">Pound</option>
-                                                                <option value="Euro">Euro</option>
-                                                                <option value="Yen">Yen</option>
-                                                                <option value="Won">Korean won</option>
-                                                            </select>
-                                                </div>
-                                              </div>
-                                              <!-- second currency field -->
-                                  <input type="number" id="numberTwo" class="form-control" disabled>
-                                </div>
-                              </form>
-                            <div id="CurrencyExchangeHTML"></div>
+                             Ammount in
+                     </div>
+                     <div class="col align-self-start">
+                             <select oninput="calcT()" onchange="calcT()" class="form-control form-control-sm" id="CurrencySelection" style="width:30%;">
+                                     <option value="Dollar">Dollar</option>
+                                     <option value="Reais">Reais</option>
+                                     <option value="Pound">Pound</option>
+                                     <option value="Euro">Euro</option>
+                                     <option value="Yen">Yen</option>
+                                     <option value="Won">Korean won</option>
+                                 </select>
+                     </div>
+                   </div>
+                   <!-- second currency field -->
+       <input type="number" id="numberTwo" class="form-control" disabled>
+     </div>
+   </form>
 
 <!-- end currency converter -->
-                            <div id="citycountrycurrency">citycountrycurrency</div>
-                            <div id="displayWeather">displayWeather</div>
-                            <!-- <div id="accelerometer"></div> -->
-
 
                             <!-- I've added this place to display the tilting of the phone -->
                             
                             
-                            <button onclick="getLocation()"> Get Location!! </button>
-                            <br>
-                            <button onclick="home()"> See home address!! </button>
-                            <br>
-                            <div id="map">Map goes here!</div>
+                            <!-- <button onclick="getLocation()">Refresh location!! </button> -->
+                            <!-- <button onclick="home()"> See home address!! </button> -->
+                            <div id="map">A map should have appeared here!</div>
                             <br>
                             <button onclick="shake()">Shake it! </button>
 <br>

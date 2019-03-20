@@ -17,7 +17,6 @@ $$(document).on('deviceready', function() {
     //start watch is for the device motion
     // startWatch();    
     getLocation();
-
 });
 
 
@@ -70,7 +69,7 @@ function accCallback(acceleration){
 // onError callback
 function onError(msg){
     // console.log(msg);
-    // console.log("not working");
+     console.log("not working");
 
 }
 
@@ -105,6 +104,7 @@ function geoCallback(position){
     displayWeather(lat, lon);
     printFlag(lat, lon);
     currencyExchange();
+    nearestAirport(lat, lon);
 }
 
 function initMap() {
@@ -159,6 +159,7 @@ function home(lat, lon){
 //onvrdisplaypresentchange is the function that get city, currency and country
 
 var currency;
+var welcome;
 function onvrdisplaypresentchange(lat, lon){
      console.log("onvrdisplaypresentchange called");
     var http = new XMLHttpRequest();
@@ -174,15 +175,15 @@ function onvrdisplaypresentchange(lat, lon){
         var city =  responseJSON.results[0].components.city;
         var country =  responseJSON.results[0].components.country;
         currency =  responseJSON.results[0].annotations.currency.name;
-        console.log(currency);
         var callingcode = responseJSON.results[0].annotations.callingcode;
         var timestamp2 = responseJSON.timestamp.created_http;
-        var oc ="<div>"+ timestamp2 + "</div><br><br><h1>Hi there, welcome to " + city + ", "+ country + ".</h1><br>" + currency + " is the local currency." + "<br> If you need to make a phone call the country code is " + callingcode;
-        document.getElementById('citycountrycurrency').innerHTML = oc; 
-        
-        var ac = currency;
-        document.getElementById('localCurrency').innerHTML = ac; 
-        
+        welcome = timestamp2 + "<br>Hi there, welcome to " + city + ", "+ country + ".";
+        var localCurrency = "Currency Exchange - "+currency + " is the local currency.";
+        var phoneCall =  "If you need to make a phone call the country code is " + callingcode;
+        document.getElementById('phoneCall').innerHTML = phoneCall; 
+        document.getElementById('welcome').innerHTML = welcome; 
+        document.getElementById('localCurrency').innerHTML = localCurrency; 
+
 
 
         }   
@@ -249,7 +250,7 @@ function currencyExchange(){
     //http://apilayer.net/api/live?access_key=0c926538381be4e7284c7b41ed282fda&convert?from=EUR&to=GBP&amount=100
 
     //create a variable with the URL that has the JSON
-    const url = 'http://apilayer.net/api/live?access_key=0c926538381be4e7284c7b41ed282fda&convert?from=EUR&to=GBP&amount=100';
+    const url = 'http://www.apilayer.net/api/live?access_key=0c926538381be4e7284c7b41ed282fda';
   //GET THE INFORMATION
     httpCurrencyExchange.open("GET", url);
     httpCurrencyExchange.send();
@@ -263,7 +264,7 @@ function currencyExchange(){
 
         //TRANSLTE THE RESPONSE IN JSON
         var responseCurrencyExchangeJson = JSON.parse(responseCurrencyExchange);
-        //   console.log(responseCurrencyExchangeJson);
+        //    console.log(responseCurrencyExchangeJson);
 
         //CREATE A VARIABLE WITH DOLLAT TO EURO, FROM THE JSON ANSWER
         //the .toprecision makes it with the number of caracter, example euro we need just the first tree digits.
@@ -273,14 +274,6 @@ function currencyExchange(){
            USDGBP =  responseCurrencyExchangeJson.quotes.USDGBP.toPrecision(3);
            USDJPY =  responseCurrencyExchangeJson.quotes.USDJPY.toPrecision(5);
            USDKRW =  responseCurrencyExchangeJson.quotes.USDKRW.toPrecision(6);
-
-
-       //CREATE A VARIABLE WITH HTML AND JSON
-         var CurrencyExchangeHTML ="1 United States Dollar in Euro equals<br><b><font size=6>" +USDEUR+"</font></b><br> 1 United States Dollar in Reais equals<br><b><font size=6>" +USDBRL+"</font></b>";
-        
-        //SEND THE VARIABLE TO ELEMENT ID, WHICH IS A DIV ON HTML
-         document.getElementById('CurrencyExchangeHTML').innerHTML = CurrencyExchangeHTML; 
-       
        
        //fill the field ammount in dolar with one dolar.
          document.getElementById('AmmountMoney').value = USDUSD; 
@@ -288,6 +281,7 @@ function currencyExchange(){
          calcT();
          Real =  USDUSD / USDBRL;
          Pound = USDUSD / USDGBP;
+        //  console.log("pound "+ Pound + " =USDUSD " + USDUSD + " USDGBP " + USDGBP);
          Euro = USDUSD / USDEUR;
          Yen = USDUSD / USDJPY;
          Won = USDUSD / USDKRW;
@@ -306,42 +300,35 @@ function calcT(){
     //first field selection
     FromCurrencySelection = document.getElementById('FromCurrencySelection').value;
     
+    // ((ammount * selector um(ex: real) * selector dois(ex: pound)
+                //valor br in dollar entao dollar in pound
     switch(FromCurrencySelection){
         case "Dollar":
-            FromCurrencyToDollar = USDUSD;
+            FromCurrencyToDollar = (AmmountMoney * USDUSD);
 
         break;
 
         case "Reais":
             FromCurrencyToDollar = (AmmountMoney * Real);
-            console.log("reais "+ FromCurrencyToDollar);
 
         break;
         
         case "Pound":
-        
-// ((ammount * selector um(ex: real) * selector dois(ex: pound)
-                //valor br in dollar entao dollar in pound
-            FromCurrencySelection = USDGBP;
-            console.log("Pound "+USDGBP);
-
+            FromCurrencyToDollar = (AmmountMoney * Pound) ;
         break;
         
         case "Euro":
-            FromCurrencySelection = USDEUR;
-            console.log("euro "+USDEUR);
+            FromCurrencyToDollar = (AmmountMoney * Euro);
 
         break;
         
         case "Yen":
-        FromCurrencySelection = USDJPY;
-            console.log("japonese "+USDJPY);
+            FromCurrencyToDollar = (AmmountMoney * Yen);
 
         break;
         
         case "Won":            
-            FromCurrencySelection = USDKRW;
-            console.log("Korean Won "+USDKRW);
+            FromCurrencyToDollar = (AmmountMoney * Won);
 
         break;
     }
@@ -352,53 +339,73 @@ function calcT(){
     switch(CurrencySelection){
         case "Dollar":
             CurrencySelection = USDUSD;
-            // console.log("Dollar "+USDUSD);
 
          break;
 
         case "Reais":
-            // CurrencySelection = USDBRL;
-            // console.log("reais "+USDBRL);
-            CurrencySelection = Real;
+            CurrencySelection = USDBRL;
 
         break;
         
         case "Pound":
-            // CurrencySelection = USDGBP;
-            console.log("Pound "+USDGBP);
-            CurrencySelection = Pound;
-
+            CurrencySelection = USDGBP;
         break;
         
         case "Euro":
-            // CurrencySelection = USDEUR;
-            console.log("euro "+USDEUR);
-            CurrencySelection = Euro;
+            CurrencySelection = USDEUR;
 
         break;
         
         case "Yen":
-            // CurrencySelection = USDJPY;
-            console.log("japonese "+USDJPY);
-            CurrencySelection = Yen;
+            CurrencySelection = USDJPY;
 
         break;
         
         case "Won":            
-            // CurrencySelection = USDKRW;
-            console.log("Korean Won "+USDKRW);
-            CurrencySelection = Won;
-
+            CurrencySelection = USDKRW;
         break;
     }
 
-    // ((ammount * selector um(ex: real) * selector dois(ex: pound)
-
     document.getElementById('numberTwo').value = ((FromCurrencyToDollar) * CurrencySelection) ;
-    console.log("first number  certo?"+AmmountMoney +"CurrencySelection"+CurrencySelection)
     
 }
 
 //end currency function
 
+// nearest airport information
+//nearestAirport is the function that get the weather
+function nearestAirport(lat, lon){
+     console.log("nearestAirport called");
+     console.log("lat " +lat + " long " + lon);
+    var httpAirport = new XMLHttpRequest();
+    // console.log("http request " + http);
+  const url = 'https://iatacodes.org/api/v6/nearby?api_key=e6d5fae9-f7b9-4d1a-a219-08a0a5447427&lat=53.3458902&lng=-6.2575&distance=100';
+    // const url = 'https://iatacodes.org/api/v6/nearby?api_key=e6d5fae9-f7b9-4d1a-a219-08a0a5447427&lat='+lat+'&'+'lng='+lon+'&distance=100';
+    console.log(url)
+    httpAirport.open("GET", url);
+    httpAirport.send();
 
+    httpAirport.onreadystatechange = (e) => {
+        if (this.readyState == 4 && this.status == 200) {
+            var certo = "funcionou";
+            document.getElementById("airport").innerHTML = certo;
+
+         }else {
+            var errado = "oi";
+            document.getElementById("airport").innerHTML = errado;
+ 
+         }
+        var responseAirport = httpAirport.responseText;
+        //var responseAirport = JSON.parse(responseAirport);
+         console.log("below the airport information");
+         console.log(responseAirport);
+
+       
+        
+
+        // var htmlWeather = "You are in "+cityName + "<br><b> " + temperature + "&#176;</b> degree<br> " + "Humidity: " +humidity+ "<br>Windy: "+WindSpeed+" km/h";
+        //  document.getElementById('displayWeather').innerHTML = htmlWeather; 
+
+        } 
+}
+// end nearest airport information
