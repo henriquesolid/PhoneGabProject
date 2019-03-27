@@ -181,8 +181,8 @@ function opencageAPI(){
         var country =  responseJSON.results[0].components.country;
         currency =  responseJSON.results[0].annotations.currency.name;
         var callingcode = responseJSON.results[0].annotations.callingcode;
-        var timestamp2 = responseJSON.timestamp.created_http;
-        welcome = timestamp2 + "<br>Hi there, welcome to " + city + ", "+ country + ".";
+        var timestamp = responseJSON.timestamp.created_http;
+        welcome = timestamp + "<br>Hi there, welcome to " + city + ", "+ country + ".";
         var localCurrency = "Currency Exchange - "+currency + " is the local currency.";
         var phoneCall =  "If you need to make a phone call the country code is " + callingcode;
         document.getElementById('phoneCall').innerHTML = phoneCall; 
@@ -208,18 +208,20 @@ function displayWeather(){
     http2.onreadystatechange = (e) => {
         var responseWeather = http2.responseText;
         var responseJSONWeather = JSON.parse(responseWeather);
-        // console.log("below the weather informations");
-        // console.log(responseJSONWeather);
+         console.log("below the weather informations");
+         console.log(responseJSONWeather);
 
         var temperature =  responseJSONWeather.main.temp;
         var humidity = responseJSONWeather.main.humidity;
         var weatherConditions = responseJSONWeather.weather[0].description;;
-        var cityName = responseJSONWeather.name;
+        var neighbor = responseJSONWeather.name;
         var WindSpeed =  responseJSONWeather.wind.speed;
-        
 
-        var htmlWeather = "You are in "+cityName + "<br><b> " + temperature + "&#176;</b> degree<br> " + "Humidity: " +humidity+ "<br>Windy: "+WindSpeed+" km/h";
+
+        var htmlWeather = temperature + "&#176;</b> degree<br> " + "Humidity: " +humidity+ "<br>Windy: "+WindSpeed+" km/h";
          document.getElementById('displayWeather').innerHTML = htmlWeather; 
+         document.getElementById('weatherConditions').innerHTML = weatherConditions; 
+
 
         } 
         
@@ -427,7 +429,7 @@ function nearestAirport(){
         airportName =  responseAirport.response[0].name;
         ipAddress   =  responseAirport.request.client.ip;
 
-        var airport = "The nearest airport is " + airportCode + " " + airportName + ".";
+        var airport = "The nearest airport is " + airportCode + " - " + airportName + " airport.";
        
         document.getElementById('airport').innerHTML = airport; 
 

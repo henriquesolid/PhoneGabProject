@@ -44,6 +44,13 @@
     <div class="panel panel-left panel-reveal">
         <div class="content-block">
             <p>Visited places</p>
+
+            <div id = "hello"></div>
+
+
+
+
+
         </div>
     </div>
 
@@ -70,14 +77,89 @@
                 <!-- Page, "data-page" contains page name -->
                 <div data-page="index" class="page">
                     <!-- Scrollable page content -->
-                    <div class="page-content">
-                        <div class="content-block">
-                            <div id="displayWeather">Loading Weather</div><br>
-                            <div id="airport">Loading nearest airport</div>
-    
-                            <!-- <div id="accelerometer"></div> -->
+                    <div class="page-content ">
+                        <!-- element card at below div gives the white background -->
+                        <!-- <div class="content-block card"> -->
+                                <div class="content-block">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- addition "card-expandable" class on card to make it expandable -->
+<div class="card card-expandable card-tablet-fullscreen">
+    Card expandable
+    <!-- card content -->
+    <div class="card-content">
+      <!-- put all content here -->
+      content
+      <div class="card-content-padding">padding</div>
+      <div class="card-header"> header </div>
+      <div class="card-footer">footer</div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="row">
+
+            <div class="card demo-card-header-pic col">
+                    <div style="background-image:url(https://b.kisscc0.com/20180717/sww/kisscc0-weather-forecasting-ios-7-computer-icons-iphone-weather-icon-5b4dc938755222.3692575815318244404806.jpg)" class="card-header align-items-flex-end"></div>
+                    <div class="card-content card-content-padding">
+                        <b><f id="weatherConditions">Loading Weather</f></b>
+                      <p id="displayWeather">Loading Weather</p>
+                    </div>
+                    <!-- <div class="card-footer"><a href="#" class="link">Read more</a></div> -->
+                  </div>
+                  
+                  <div class="card demo-card-header-pic col">
+                    <div style="background-image:url(http://iconsetc.com/icons-watermarks/flat-circle-white-on-ios-orange-gradient/ocha/ocha_logistics-airport/ocha_logistics-airport_flat-circle-white-on-ios-orange-gradient_512x512.png)" class="card-header align-items-flex-end"></div>
+                    <div class="card-content card-content-padding">
+                      <p id="airport">Loading nearest airport</p>
+                    </div>
+                    <!-- <div class="card-footer"><a href="#" class="link">Read more</a></div> -->
+                  </div>
+    </div>
+
+
+
+
+
+    <!-- div for map -->
+    <div class="row">
+            <div class="card demo-card-header-pic col">
+                    <div style="background-image:url(http://www.sclance.com/pngs/google-maps-logo-png/google_maps_logo_png_595148.png)" class="card-header align-items-flex-end"></div>
+                    <div class="card-content card-content-padding">
+                      <p id="map"></p>
+                    </div>
+                    <div class="card-footer"><button onclick="getLocation()" class="button button-round button-fill">See your location.</button></div>
+                  </div>
+    </div>
+    <!-- end div for map -->
+
+
+ <!-- <div id="accelerometer"></div> -->
                            
                             <!-- start currency converter -->
+                            <!-- img for currency converter -->
+                            <!-- https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-3tW90VxJos7aEyr3xHo-SfnVczxIknYpq3MjPQ3eZ6kfnQ08Iw -->
                             <div id="localCurrency">Loading currency converter</div>
                             <form>
      <div class="form-group">
@@ -86,12 +168,12 @@
      Ammount in
      <div class="col">
              <select oninput="calcT()" onchange="calcT()" class="form-control form-control-sm" id="FromCurrencySelection" style="width:30%;">
-                     <option value="Dollar">Dollar</option>
-                     <option value="Reais">Reais</option>
-                     <option value="Pound">Pound</option>
-                     <option value="Euro">Euro</option>
-                     <option value="Yen">Yen</option>
-                     <option value="Won">Korean won</option>
+                                     <option value="Dollar">American - Dollar</option>
+                                     <option value="Reais">Brazilian - Reais</option>
+                                     <option value="Pound">British - Pound</option>
+                                     <option value="Euro">European - Euro</option>
+                                     <option value="Yen">Chinese - Yen</option>
+                                     <option value="Won">Korean - won</option>
                  </select>
      </div>
        <input oninput="calcT()" onchange="calcT()" type="number" id="AmmountMoney" class="form-control">
@@ -105,12 +187,12 @@
                      </div>
                      <div class="col align-self-start">
                              <select oninput="calcT()" onchange="calcT()" class="form-control form-control-sm" id="CurrencySelection" style="width:30%;">
-                                     <option value="Dollar">Dollar</option>
-                                     <option value="Reais">Reais</option>
-                                     <option value="Pound">Pound</option>
-                                     <option value="Euro">Euro</option>
-                                     <option value="Yen">Yen</option>
-                                     <option value="Won">Korean won</option>
+                                     <option value="Dollar">American - Dollar</option>
+                                     <option value="Reais">Brazilian - Reais</option>
+                                     <option value="Pound">British - Pound</option>
+                                     <option value="Euro">European - Euro</option>
+                                     <option value="Yen">Chinese - Yen</option>
+                                     <option value="Won">Korean - won</option>
                                  </select>
                      </div>
                    </div>
@@ -126,9 +208,9 @@
                             
                             <!-- <button onclick="getLocation()">Refresh location!! </button> -->
                             <!-- <button onclick="home()"> See home address!! </button> -->
-                            <div id="map">A map should have appeared here!</div>
+                            <!-- <div id="map">A map should have appeared here!</div> -->
                             <br>
-                            <button onclick="shake()">Shake it! </button>
+                            <button onclick="shake()" class="button button-round button-fill">Shake it! </button>
 <br>
 <div id="phoneCall">Loading country code</div>
 
