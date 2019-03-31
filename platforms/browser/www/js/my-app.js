@@ -71,14 +71,6 @@ function accCallback(acceleration){
 			      'Acceleration Z: ' + acceleration.z + '<br>' +
 			      'Timestamp: ' + acceleration.timestamp + '<br>';
 
-
-}
-
-// onError callback
-function onError(msg){
-    // console.log(msg);
-     console.log("not working");
-
 }
 
 // JSON object
@@ -86,9 +78,6 @@ var options = {
     frequency: 3000
 }
 // end device accelaration/motion
-
-
-
 
 function getLocation(){
     navigator.geolocation.getCurrentPosition(geoCallback, onError);
@@ -101,13 +90,13 @@ function geoCallback(position){
     lat =   position.coords.latitude;
     lon =  position.coords.longitude;
     
-  
     opencageAPI();
     // refreshMap();
     displayWeather();
     printFlag();
     currencyExchange();
     nearestAirport();
+    timeStampConverter();
 }
 
 function initMap() {
@@ -131,9 +120,7 @@ function initMap() {
 
 function refreshMap(){
     console.log("refreshMap called ");
-    console.log("lat " + lat + "long" + lon);
     var point = {lat: lat, lng: lon};
-
     var map = new
    google.maps.Map(document.getElementById('map'),
    { zoom: 17,
@@ -158,7 +145,6 @@ function home(){
       position: home, 
       map: map
       });
-  
 }
 
 //opencageAPI is the function that get city, currency and country
@@ -176,29 +162,34 @@ function opencageAPI(){
     http.onreadystatechange = (e) => {
         var response = http.responseText;
         var responseJSON = JSON.parse(response);
-
         var city =  responseJSON.results[0].components.city;
         var country =  responseJSON.results[0].components.country;
         currency =  responseJSON.results[0].annotations.currency.name;
         var callingcode = responseJSON.results[0].annotations.callingcode;
-        var timestamp = responseJSON.timestamp.created_http;
-        welcome = timestamp + "<br>Hi there, welcome to " + city + ", "+ country + ".";
-        var localCurrency = "Currency Exchange - "+currency + " is the local currency.";
+        var actualDate = responseJSON.timestamp.created_http;
+        welcome = "Hi there, welcome to " + city + ", "+ country + ".";
+        var localCurrency = currency + " is the local currency.";
         var phoneCall =  "If you need to make a phone call the country code is " + callingcode;
         document.getElementById('phoneCall').innerHTML = phoneCall; 
         document.getElementById('welcome').innerHTML = welcome; 
         document.getElementById('localCurrency').innerHTML = localCurrency; 
-
-
-
         }   
 
-
 }
-
+        var temperature;
+        var humidity;
+        var condition ;
+        var neighbor;
+        var WindSpeed;
+        var Windy;
+        var pressure;
+        var temp_max;
+        var temp_min;
+        var sunrise;
+        var sunset;
 //displayWeather is the function that get the weather
 function displayWeather(){
-    // console.log("displayWeather called");
+    console.log("displayWeather called");
     var http2 = new XMLHttpRequest();
 //  const url = 'http://api.openweathermap.org/data/2.5/weather?lat=35&lon=139&units=metric&appid=c161f2e8363f6ef8be3d9cc89baf322e';
     const url = 'http://api.openweathermap.org/data/2.5/weather?lat='+lat+'&'+'lon='+lon+'&units=metric&appid=c161f2e8363f6ef8be3d9cc89baf322e';
@@ -208,31 +199,47 @@ function displayWeather(){
     http2.onreadystatechange = (e) => {
         var responseWeather = http2.responseText;
         var responseJSONWeather = JSON.parse(responseWeather);
-         console.log("below the weather informations");
-         console.log(responseJSONWeather);
+        
+         temperature =  responseJSONWeather.main.temp;
+         temperature ="<f id='degree'>" + temperature + "&#176 degree </f>";
+         humidity = responseJSONWeather.main.humidity;
+         condition = responseJSONWeather.weather[0].description;
+         neighbor = responseJSONWeather.name;
+         WindSpeed =  responseJSONWeather.wind.speed;
+         Windy = "Windy: "+WindSpeed+" km/h";
+         pressure =  responseJSONWeather.main.pressure;
+         temp_max =  responseJSONWeather.main.temp_max;
+         temp_min =  responseJSONWeather.main.temp_min;
+         sunrise =  responseJSONWeather.sys.sunrise;
+         sunset =  responseJSONWeather.sys.sunset;
 
-        var temperature =  responseJSONWeather.main.temp;
-        var humidity = responseJSONWeather.main.humidity;
-        var weatherConditions = responseJSONWeather.weather[0].description;;
-        var neighbor = responseJSONWeather.name;
-        var WindSpeed =  responseJSONWeather.wind.speed;
-
-
-        var htmlWeather = temperature + "&#176;</b> degree<br> " + "Humidity: " +humidity+ "<br>Windy: "+WindSpeed+" km/h";
-         document.getElementById('displayWeather').innerHTML = htmlWeather; 
-         document.getElementById('weatherConditions').innerHTML = weatherConditions; 
-
-
+        document.getElementById('condition').innerHTML = condition; 
+        document.getElementById('temperature').innerHTML = temperature; 
+        document.getElementById('neighbor').innerHTML = neighbor; 
         } 
         
 
 }
+
+function weatherMore(){
+
+    temp_max = "Maximum: " + temp_max + "&#176 degree<br>";
+    temp_min = "Minimum: " + temp_min + "&#176 degree<br>";
+    Windy = "Windy: " + Windy + "<br>";
+    humidity = "Humidity: " + humidity + "<br>";
+    pressure = "pressure: " + pressure + "<br>";
+    sunrise = "sunrise: " + sunrise + "<br>";
+    sunset = "Sunset: " + sunset + "<br>";
+
+    var weatherMore = temp_max + temp_min + Windy + humidity + pressure + sunrise + sunset;
+
+
+    document.getElementById('weatherMore').innerHTML = weatherMore; 
+  
+}
+
 function printFlag(){
-    // console.log("print flag");
-    // console.log("printing longitude");
-    // console.log(lon);
-    // console.log("printing latitude");
-    // console.log(lat);
+   
 }
 
 // currency below
@@ -261,24 +268,17 @@ function currencyExchange(){
   //GET THE INFORMATION
     httpCurrencyExchange.open("GET", url);
     httpCurrencyExchange.send();
-    // console.log(url);
 
 
 //READY THE HTTP REQUEST
     httpCurrencyExchange.onreadystatechange = (e) => {
-        if (httpCurrencyExchange.readyState == 4 && httpCurrencyExchange.status == 200) {
-            // console.log("if working started");
-           
-         
+          
         //STORE IN A VARIABLE THE HTTP RESPONSE
         var responseCurrencyExchange = httpCurrencyExchange.responseText;
 
         //TRANSLTE THE RESPONSE IN JSON
         var responseCurrencyExchangeJson = JSON.parse(responseCurrencyExchange);
-        // console.log(responseCurrencyExchange);
-        // console.log(responseCurrencyExchangeJson);
-
-
+        
         //CREATE A VARIABLE WITH DOLLAT TO EURO, FROM THE JSON ANSWER
         //the .toprecision makes it with the number of caracter, example euro we need just the first tree digits.
            USDUSD =  responseCurrencyExchangeJson.quotes.USDUSD.toPrecision(3);
@@ -294,15 +294,10 @@ function currencyExchange(){
          calcT();
          Real =  USDUSD / USDBRL;
          Pound = USDUSD / USDGBP;
-        //  console.log("pound "+ Pound + " =USDUSD " + USDUSD + " USDGBP " + USDGBP);
          Euro = USDUSD / USDEUR;
          Yen = USDUSD / USDJPY;
          Won = USDUSD / USDKRW;
-    }else {
-        // console.log("if else called");
-     }
     }
-
 }
 var AmmountMoney; 
 var CurrencySelection;
@@ -391,44 +386,24 @@ function calcT(){
 var ipAddress;
 var airportCode;
 var airportName;
-
 // nearest airport information
 //nearestAirport is the function that get the weather
 function nearestAirport(){
-    //  console.log("nearestAirport called");
-    //  console.log("lat " +lat + " long " + lon);
+     console.log("nearestAirport called");
+    
      var httpAirport = new XMLHttpRequest();
-    // console.log("http request " + http);
     //const url = 'http://iatacodes.org/api/v6/nearby?api_key=e6d5fae9-f7b9-4d1a-a219-08a0a5447427&lat=53.3458902&lng=-6.2575&distance=100';
      const url = 'http://iatacodes.org/api/v6/nearby?api_key=e6d5fae9-f7b9-4d1a-a219-08a0a5447427&lat='+lat+'&'+'lng='+lon+'&distance=100';
-    // console.log(url)
+     console.log(url)
     httpAirport.open("GET", url);
     httpAirport.send();
-// console.log("vai poha");
-// console.log(httpAirport);
-// console.log("vai poha 2");
+
     httpAirport.onreadystatechange = (e) => {     
-        if (httpAirport.readyState == 1 && httpAirport.status == 200) {
-            var certo = "funcionou";
-            console.log("deu certo");
-
-        }else {
-            var errado = "oi";
-            console.log("deu errado");
- 
-        }  
-
         var responseAirport = httpAirport.responseText;
-        // console.log("befor text");
-        // console.log(responseAirport);
         responseAirport = JSON.parse(responseAirport);
-        //  console.log("below the responseAirport");
-        //    console.log(responseAirport);
-
         airportCode =  responseAirport.response[0].code;
         airportName =  responseAirport.response[0].name;
         ipAddress   =  responseAirport.request.client.ip;
-
         var airport = "The nearest airport is " + airportCode + " - " + airportName + " airport.";
        
         document.getElementById('airport').innerHTML = airport; 
@@ -440,5 +415,123 @@ function nearestAirport(){
 function shake(){
     navigator.vibrate(1000);
      console.log("shaking working!");
-     refreshMap();
 }
+
+function tryingFile(){
+    console.log("tryingFile called");
+//get access to file system
+    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, fileSystemCallback, onError
+    );
+}
+
+function fileSystemCallback(fs){
+    console.log("fileSystemCallback called");
+
+    // Name of the file I want to create
+    var fileToCreate = "newPersistentFile.txt";
+
+    // Opening/creating the file
+    fs.root.getFile(fileToCreate, fileSystemOptionals, getFileCallback, onError);
+}
+
+var fileSystemOptionals = { create: true, exclusive: false };
+console.log("fileSystemOptionals called");
+
+
+//after file system called, filesystem call back get the file system result and open/create the file
+//getfilecallback create a file with the 
+function getFileCallback(fileEntry){
+    console.log("getFileCallback called");
+
+    var textInsert = document.getElementById('yourText').value;
+    var dataObj = new Blob([textInsert], { type: 'text/plain' });
+    // Now decide what to do
+    // Write to the file
+    writeFile(fileEntry, dataObj);
+
+    // Or read the file
+    readFile(fileEntry);
+}
+
+// Let's write some files
+function writeFile(fileEntry, dataObj) {
+    console.log("writeFile called");
+
+    // Create a FileWriter object for our FileEntry (log.txt).
+    fileEntry.createWriter(function (fileWriter) {
+
+        // If data object is not passed in,
+        // create a new Blob instead.
+        if (!dataObj) {
+            dataObj = new Blob(['Hello, worked second chance'], { type: 'text/plain' });
+        }
+
+        fileWriter.write(dataObj);
+
+        fileWriter.onwriteend = function() {
+            console.log("Successful file write...");
+        };
+
+        fileWriter.onerror = function (e) {
+            console.log("Failed file write: " + e.toString());
+        };
+
+    });
+}
+var varFile;
+// Let's read some files
+function readFile(fileEntry) {
+    console.log("readFile called");
+
+    // Get the file from the file entry
+    fileEntry.file(function (file) {
+        
+        // Create the reader
+        var reader = new FileReader();
+        reader.readAsText(file);
+
+        reader.onloadend = function() {
+            console.log("Successful file read: " + this.result);
+            varFile = this.result;
+            console.log("file path: " + fileEntry.fullPath);
+        };
+
+    }, onError);
+}
+
+function tryinganother(){
+    console.log(varFile);
+}
+
+function onError(msg){
+    console.log("onError called");
+    console.log(msg);
+}
+
+// timestamp converter for weather
+function timeStampConverter(){
+    console.log("timeStampConverter called");
+     //store in a variable the http request
+     var http = new XMLHttpRequest();    
+     //https://helloacm.com/api/unix-timestamp-converter/?cached&s=1553667088
+ 
+     //create a variable with the URL that has the JSON
+     const url = 'https://helloacm.com/api/unix-timestamp-converter/?cached&s=1553667088';
+   //GET THE INFORMATION
+     http.open("GET", url);
+     http.send();
+   
+ //READY THE HTTP REQUEST
+    http.onreadystatechange = (e) => {
+        
+         //STORE IN A VARIABLE THE HTTP RESPONSE
+         var response = http.responseText;
+                       
+            //TRANSLTE THE RESPONSE IN JSON
+         var response = JSON.parse(response);
+
+        //fill the field ammount in dolar with one dolar.
+          document.getElementById('timestamp').innerHTML = response; 
+    
+     }
+ }

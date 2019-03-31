@@ -21,16 +21,22 @@
     <meta name="msapplication-tap-highlight" content="no">
 
     <!-- Your app title -->
-    <title>My App</title>
+    <title>Traveller Helper!</title>
 
-    <!-- This template defaults to the iOS CSS theme. To support both iOS and material design themes, see the Framework7 Tutorial at the link below:
-        http://www.idangero.us/framework7/tutorials/maintain-both-ios-and-material-themes-in-single-app.html
-     -->
-
+    
+    <!-- Framework7 CSS -->
     <link rel="stylesheet" href="lib/framework7/css/framework7.ios.min.css">
     <link rel="stylesheet" href="lib/framework7/css/framework7.ios.colors.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- Bootstrap CSS -->
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+     
+    
+    <!-- Custom CSS styles -->
     <link rel="stylesheet" href="css/styles.css">
 </head>
 
@@ -45,7 +51,7 @@
         <div class="content-block">
             <p>Visited places</p>
 
-            <div id = "hello"></div>
+            <div id="hello"></div>
 
 
 
@@ -62,7 +68,7 @@
             <div class="navbar">
                 <div class="navbar-inner">
                     <!-- We need cool sliding animation on title element, so we have additional "sliding" class -->
-                    <div class="" id="welcome"></div>
+                    <div class="" id="welcome">welcome</div>
                     <div class="right">
                         <!--
                           Right link contains only icon - additional "icon-only" class
@@ -75,62 +81,44 @@
             <!-- Pages container, because we use fixed-through navbar and toolbar, it has additional appropriate classes-->
             <div class="pages navbar-through toolbar-through">
                 <!-- Page, "data-page" contains page name -->
+
                 <div data-page="index" class="page">
+
+
                     <!-- Scrollable page content -->
                     <div class="page-content ">
                         <!-- element card at below div gives the white background -->
-                        <!-- <div class="content-block card"> -->
-                                <div class="content-block">
 
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- addition "card-expandable" class on card to make it expandable -->
-<div class="card card-expandable card-tablet-fullscreen">
-    Card expandable
-    <!-- card content -->
-    <div class="card-content">
-      <!-- put all content here -->
-      content
-      <div class="card-content-padding">padding</div>
-      <div class="card-header"> header </div>
-      <div class="card-footer">footer</div>
-    </div>
-  </div>
-
-
-
-
-
-
-
-
-
-
+                        <!-- <div class="content-block"> -->
+                        
 
 
     <div class="row">
 
-            <div class="card demo-card-header-pic col">
-                    <div style="background-image:url(https://b.kisscc0.com/20180717/sww/kisscc0-weather-forecasting-ios-7-computer-icons-iphone-weather-icon-5b4dc938755222.3692575815318244404806.jpg)" class="card-header align-items-flex-end"></div>
-                    <div class="card-content card-content-padding">
-                        <b><f id="weatherConditions">Loading Weather</f></b>
-                      <p id="displayWeather">Loading Weather</p>
-                    </div>
-                    <!-- <div class="card-footer"><a href="#" class="link">Read more</a></div> -->
-                  </div>
-                  
+        <div class="card demo-card-header-pic col">
+            <div style="background-image:url(https://cdn.framework7.io/placeholder/nature-1000x600-3.jpg)" class="card-header align-items-flex-end" id="temperature">Loading temperature</div>
+            <div class="card-content card-content-padding">
+              <p class="date">Currenty weather in <f id="neighbor"></f></p>
+              Condition: <f id="condition">Loading condition</f><br>
+              
+              <!-- Maximum <f id="temp_max"></f>&#176 degree<br>
+              Minimum<f id="temp_min"></f>&#176 degree<br>
+              <f id="Windy">Loading Windy</f><br>
+              Humidity: <f id="humidity">Loading humidity</f><br>
+              Sunrise: <f id="timestamp">Loading sunrise</f><br>
+              Pressure: <f id="pressure">Loading pressure</f><br>
+              Sunrise: <f id="sunrise">Loading sunrise</f><br>
+              Sunset: <f id="sunset">Loading sunset</f><br> -->
+
+            </div>
+            <div class="card-footer"><a onclick=weatherMore() href="" class="link">Read more</a></div>
+            <div id="weatherMore"></div>
+          </div>
+    </div>
+    <div class="row">
+
                   <div class="card demo-card-header-pic col">
-                    <div style="background-image:url(http://iconsetc.com/icons-watermarks/flat-circle-white-on-ios-orange-gradient/ocha/ocha_logistics-airport/ocha_logistics-airport_flat-circle-white-on-ios-orange-gradient_512x512.png)" class="card-header align-items-flex-end"></div>
+                    <div style="background-image:url(https://cdn.images.express.co.uk/img/dynamic/25/590x/Liverpool-Airport-Bank-holiday-strike-flights-1004169.jpg?r=1534421963960)" class="card-header align-items-flex-end"></div>
                     <div class="card-content card-content-padding">
                       <p id="airport">Loading nearest airport</p>
                     </div>
@@ -149,55 +137,57 @@
                     <div class="card-content card-content-padding">
                       <p id="map"></p>
                     </div>
-                    <div class="card-footer"><button onclick="getLocation()" class="button button-round button-fill">See your location.</button></div>
+                    <div class="card-footer"><button onclick="refreshMap()" class="button button-round button-fill">See your location.</button></div>
                   </div>
     </div>
     <!-- end div for map -->
-
-
- <!-- <div id="accelerometer"></div> -->
                            
                             <!-- start currency converter -->
                             <!-- img for currency converter -->
                             <!-- https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-3tW90VxJos7aEyr3xHo-SfnVczxIknYpq3MjPQ3eZ6kfnQ08Iw -->
                             <div id="localCurrency">Loading currency converter</div>
                             <form>
-     <div class="form-group">
+     <div class="item-inner">
      <!-- first currency field -->
+     
 
-     Ammount in
-     <div class="col">
-             <select oninput="calcT()" onchange="calcT()" class="form-control form-control-sm" id="FromCurrencySelection" style="width:30%;">
-                                     <option value="Dollar">American - Dollar</option>
-                                     <option value="Reais">Brazilian - Reais</option>
-                                     <option value="Pound">British - Pound</option>
-                                     <option value="Euro">European - Euro</option>
-                                     <option value="Yen">Chinese - Yen</option>
-                                     <option value="Won">Korean - won</option>
-                 </select>
-     </div>
-       <input oninput="calcT()" onchange="calcT()" type="number" id="AmmountMoney" class="form-control">
-     </div>
-     <div class="form-group">
-             <div class="row">
-                     <div class="col align-self-start">
-                     <!-- first currency field -->
+     Currency converter:
+     <div class="row">
+        <div class="col">
+          <input oninput="calcT()" onchange="calcT()" type="number" id="AmmountMoney" class="">
+        </div>
 
-                             Ammount in
-                     </div>
-                     <div class="col align-self-start">
-                             <select oninput="calcT()" onchange="calcT()" class="form-control form-control-sm" id="CurrencySelection" style="width:30%;">
-                                     <option value="Dollar">American - Dollar</option>
-                                     <option value="Reais">Brazilian - Reais</option>
-                                     <option value="Pound">British - Pound</option>
-                                     <option value="Euro">European - Euro</option>
-                                     <option value="Yen">Chinese - Yen</option>
-                                     <option value="Won">Korean - won</option>
-                                 </select>
-                     </div>
-                   </div>
-                   <!-- second currency field -->
-       <input type="number" id="numberTwo" class="form-control" disabled>
+        <div class="col item-inner">
+            
+              <select oninput="calcT()" onchange="calcT()" id="FromCurrencySelection">
+                  <option value="Dollar">United States Dollar</option>
+                  <option value="Reais">Brazilian Real</option>
+                  <option value="Pound">Pound sterling</option>
+                  <option value="Euro">Euro</option>
+                  <option value="Yen">Japanese Yen</option>
+                  <option value="Won">South Korean won</option>
+              </select>
+          
+        </div>
+     </div>
+
+          <div class="row">
+              <div class="col">
+                  <input type="number" id="numberTwo" class="" disabled>
+              </div>
+
+            <div class="col">
+                <select oninput="calcT()" onchange="calcT()" class="" id="CurrencySelection">
+                    <option value="Dollar">United States Dollar</option>
+                    <option value="Reais">Brazilian Real</option>
+                    <option value="Pound">Pound sterling</option>
+                    <option value="Euro">Euro</option>
+                    <option value="Yen">Japanese Yen</option>
+                    <option value="Won">South Korean won</option>
+                </select>
+            </div>
+            
+          </div>
      </div>
    </form>
 
@@ -220,15 +210,6 @@
                     </div>
                 </div>
             </div>
-            <!-- Bottom Toolbar-->
-            <div class="toolbar">
-                <div class="toolbar-inner">
-                    <a href="#" class="link">Functions</a>
-                    <a href="#" class="link">Home</a>
-                    <a href="#" class="link">Back</a>
-
-                </div>
-            </div>
         </div>
         <div class="widget_wrap" style="width:320px;height:797px;display:inline-block;"><iframe src="https://www.zomato.com/widgets/res_search_widget.php?lat=53.33306&lon=-6.24889&language_id=1&theme=red&hideCitySearch=on&hideResSearch=on&widgetType=small&sort=distance" style="position:relative;width:100%;height:100%;" border="0" frameborder="0"></iframe></div>
         <a class="twitter-timeline" data-width="400" data-height="400" data-theme="dark" href="https://twitter.com/CNN?ref_src=twsrc%5Etfw">Tweets by CNN</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
@@ -237,6 +218,8 @@
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="lib/framework7/js/framework7.min.js"></script>
     <script type="text/javascript" src="js/my-app.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
     <script src="phonegap.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyApFPNQ2WxbEueUXMJBPHjLenlPnFo68ls&callback=initMap"></script>
 </body>
