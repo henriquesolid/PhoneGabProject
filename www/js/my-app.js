@@ -94,9 +94,8 @@ function geoCallback(position){
     // refreshMap();
     displayWeather();
     printFlag();
-    currencyExchange();
+    // currencyExchange();
     nearestAirport();
-    timeStampConverter();
 }
 
 function initMap() {
@@ -151,6 +150,7 @@ function home(){
 
 var currency;
 var welcome;
+var localCurrency;
 function opencageAPI(){
      console.log("opencageAPI called");
     var http = new XMLHttpRequest();
@@ -162,31 +162,36 @@ function opencageAPI(){
     http.onreadystatechange = (e) => {
         var response = http.responseText;
         var responseJSON = JSON.parse(response);
+        console.log(responseJSON);
         var city =  responseJSON.results[0].components.city;
         var country =  responseJSON.results[0].components.country;
         currency =  responseJSON.results[0].annotations.currency.name;
         var callingcode = responseJSON.results[0].annotations.callingcode;
         var actualDate = responseJSON.timestamp.created_http;
-        welcome = "Hi there, welcome to " + city + ", "+ country + ".";
-        var localCurrency = currency + " is the local currency.";
+        welcome = "Welcome to " + city + ", "+ country + ".";
+        localCurrency = currency + " is the local currency.";
         var phoneCall =  "If you need to make a phone call the country code is " + callingcode;
         document.getElementById('phoneCall').innerHTML = phoneCall; 
         document.getElementById('welcome').innerHTML = welcome; 
         document.getElementById('localCurrency').innerHTML = localCurrency; 
+        document.getElementById('actualDate').innerHTML = actualDate; 
+
+        currencyExchange();
+
         }   
 
 }
-        var temperature;
-        var humidity;
-        var condition ;
-        var neighbor;
-        var WindSpeed;
-        var Windy;
-        var pressure;
-        var temp_max;
-        var temp_min;
-        var sunrise;
-        var sunset;
+    var temperature;
+    var humidity;
+    var condition ;
+    var neighbor;
+    var WindSpeed;
+    var Windy;
+    var pressure;
+    var temp_max;
+    var temp_min;
+    var sunrise;
+    var sunset;
 //displayWeather is the function that get the weather
 function displayWeather(){
     console.log("displayWeather called");
@@ -206,7 +211,7 @@ function displayWeather(){
          condition = responseJSONWeather.weather[0].description;
          neighbor = responseJSONWeather.name;
          WindSpeed =  responseJSONWeather.wind.speed;
-         Windy = "Windy: "+WindSpeed+" km/h";
+         Windy = WindSpeed+" km/h";
          pressure =  responseJSONWeather.main.pressure;
          temp_max =  responseJSONWeather.main.temp_max;
          temp_min =  responseJSONWeather.main.temp_min;
@@ -217,25 +222,27 @@ function displayWeather(){
         document.getElementById('temperature').innerHTML = temperature; 
         document.getElementById('neighbor').innerHTML = neighbor; 
         } 
-        
-
+    
 }
 
 function weatherMore(){
 
-    temp_max = "Maximum: " + temp_max + "&#176 degree<br>";
-    temp_min = "Minimum: " + temp_min + "&#176 degree<br>";
-    Windy = "Windy: " + Windy + "<br>";
-    humidity = "Humidity: " + humidity + "<br>";
-    pressure = "pressure: " + pressure + "<br>";
-    sunrise = "sunrise: " + sunrise + "<br>";
-    sunset = "Sunset: " + sunset + "<br>";
+    // temp_max = "Maximum: " + temp_max + "&#176 degree<br>";
+    // temp_min = "Minimum: " + temp_min + "&#176 degree<br>";
+    // Windy = "Windy: " + Windy + "<br>";
+    // humidity = "Humidity: " + humidity + "<br>";
+    // pressure = "pressure: " + pressure + "<br>";
 
-    var weatherMore = temp_max + temp_min + Windy + humidity + pressure + sunrise + sunset;
 
+    // sunrise = "sunrise: " + sunrise + "<br>";
+    
+    // var weatherMore = temp_max + temp_min + Windy + humidity + pressure;
+    var weatherMore = "<div class='row'> <div class='col'>Maximum:</div> <div class='col'>" + temp_max + "&#176degree<br> </div> </div> <div class='row'> <div class='col'>Minimum:</div> <div class='col'>" + temp_min + "&#176degree<br> </div> </div> <div class='row'> <div class='col'>Windy:</div> <div class='col'>" + Windy + "<br> </div> </div> <div class='row'> <div class='col'>Humidity:</div> <div class='col'>" + humidity + "<br> </div> </div> <div class='row'> <div class='col'>Pressure:</div> <div class='col'>" + pressure + "<br> </div> </div>";
 
     document.getElementById('weatherMore').innerHTML = weatherMore; 
-  
+
+    timeStampConverter(sunset);
+
 }
 
 function printFlag(){
@@ -290,6 +297,9 @@ function currencyExchange(){
        
        //fill the field ammount in dolar with one dolar.
          document.getElementById('AmmountMoney').value = USDUSD; 
+         var divSelectionOfCurrency = "<div class='row'> <div class='col'> <input type='number' id='numberTwo' class='' disabled> </div> <div class='col'> <select oninput='calcT()' onchange='calcT()' id='CurrencySelection'> <option value='"+currency+"'>"+currency+"</option> <option value='Reais'>Brazilian Real</option> <option value='Pound'>Pound sterling</option> <option value='Dollar'>United States Dollar</option> <option value='Yen'>Japanese Yen</option> <option value='Won'>South Korean won</option> </select> </div></div>";
+
+         document.getElementById('divSelectionOfCurrency').innerHTML = divSelectionOfCurrency; 
 
          calcT();
          Real =  USDUSD / USDBRL;
@@ -392,8 +402,12 @@ function nearestAirport(){
      console.log("nearestAirport called");
     
      var httpAirport = new XMLHttpRequest();
+    //  console.log("lon"+lon);
+    //  console.log("lat"+lat);
     //const url = 'http://iatacodes.org/api/v6/nearby?api_key=e6d5fae9-f7b9-4d1a-a219-08a0a5447427&lat=53.3458902&lng=-6.2575&distance=100';
-     const url = 'http://iatacodes.org/api/v6/nearby?api_key=e6d5fae9-f7b9-4d1a-a219-08a0a5447427&lat='+lat+'&'+'lng='+lon+'&distance=100';
+    //  const url = 'http://iatacodes.org/api/v6/nearby?api_key=e6d5fae9-f7b9-4d1a-a219-08a0a5447427&lat='+lat+'&'+'lng='+lon+'&distance=100';
+      const url = 'http://iatacodes.org/api/v6/nearby?api_key=YOUR-API-KEY&lat='+lat+'&'+'lng='+lon+'&distance=100';
+     console.log("url do airport");
      console.log(url)
     httpAirport.open("GET", url);
     httpAirport.send();
@@ -507,16 +521,24 @@ function onError(msg){
     console.log("onError called");
     console.log(msg);
 }
-
+var sunsetResponse;
 // timestamp converter for weather
 function timeStampConverter(){
     console.log("timeStampConverter called");
+    console.log(sunset + " sunset");
      //store in a variable the http request
      var http = new XMLHttpRequest();    
      //https://helloacm.com/api/unix-timestamp-converter/?cached&s=1553667088
  
+
+     var translateThis;
+     translateThis = '1553667088';
+     console.log(sunset + " translateThis");
      //create a variable with the URL that has the JSON
-     const url = 'https://helloacm.com/api/unix-timestamp-converter/?cached&s=1553667088';
+     const url = "https://helloacm.com/api/unix-timestamp-converter/?cached&s=" + sunset;
+     //const url = 'https://helloacm.com/api/unix-timestamp-converter/?cached&s=1553667088';
+
+     console.log(url);
    //GET THE INFORMATION
      http.open("GET", url);
      http.send();
@@ -525,13 +547,16 @@ function timeStampConverter(){
     http.onreadystatechange = (e) => {
         
          //STORE IN A VARIABLE THE HTTP RESPONSE
-         var response = http.responseText;
+         var sunsetResponse = http.responseText;
                        
             //TRANSLTE THE RESPONSE IN JSON
-         var response = JSON.parse(response);
+         var sunsetResponse = JSON.parse(sunsetResponse);
+        console.log(sunsetResponse + " sunsetResponse");
+
+        var sunsetDIV = "<div class='row'> <div class='col'> Sunset: </div> <div class='col'>" + sunsetResponse + "</div> </div>";
 
         //fill the field ammount in dolar with one dolar.
-          document.getElementById('timestamp').innerHTML = response; 
-    
+          document.getElementById('sunset').innerHTML = sunsetDIV; 
+
      }
  }
