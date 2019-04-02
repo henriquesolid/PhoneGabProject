@@ -48,9 +48,9 @@
     <div class="statusbar-overlay"></div>
 
     <!-- Panels overlay-->
-    <div class="panel-overlay"></div>
+    <div class="panel-overlay">panel </div>
     <!-- Left panel with reveal effect-->
-    <div class="panel panel-left panel-reveal">
+    <div class="panel panel-right panel-reveal">
         <div class="content-block">
             <p>Visited places</p>
 
@@ -65,11 +65,15 @@
 
     <!-- Views -->
     <div class="views">
+      
         <!-- Your main view, should have "view-main" class -->
         <div class="view view-main">
+          
             <!-- Top Navbar-->
             <div class="navbar">
+                Traveller Helper!
                 <div class="navbar-inner">
+              
                     <!-- We need cool sliding animation on title element, so we have additional "sliding" class -->
                     <div class="right">
                         <!--
@@ -83,12 +87,13 @@
             <!-- Pages container, because we use fixed-through navbar and toolbar, it has additional appropriate classes-->
             <div class="pages navbar-through toolbar-through">
                 <!-- Page, "data-page" contains page name -->
-
+                Traveller Helper!
                 <div data-page="index" class="page">
 
 
                     <!-- Scrollable page content -->
                     <div class="page-content ">
+                    
                         <!-- element card at below div gives the white background -->
 
                         <!-- <div class="content-block"> -->
@@ -97,14 +102,16 @@
                                   <div class="container text-center"> <img class="img-fluid rounded-circle" src="img/user.png">
                                     <h2 id="welcome">Welcome...</h2>
                                     <p class="lead">Here you will find priceless information about this country.</p>
-                                    <a class="btn social-icons" href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a> <a class="btn social-icons" href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a> <a class="btn social-icons" href="#"><i class="fa fa-behance" aria-hidden="true"></i></a> <a class="btn social-icons" href="#"><i class="fa fa-500px" aria-hidden="true"></i></a> <a class="btn social-icons" href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a> </div>
+                                    <f id="timeNow">Loading date...</f><br>
+                                    <!-- <a class="btn social-icons" href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a> <a class="btn social-icons" href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a> <a class="btn social-icons" href="#"><i class="fa fa-behance" aria-hidden="true"></i></a> <a class="btn social-icons" href="#"><i class="fa fa-500px" aria-hidden="true"></i></a> <a class="btn social-icons" href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a>  -->
+                                  </div>
                                 </div>
                               </header>
                               <section class="bg-white">
                                 <div class="container">
                                   <div class="row">
                                     <div class="col-12 text-center">
-                                      <h3 class="section-title">Traveller Helper!</h3>
+                                      <h3 class="section-title"></h3>
                                     </div>
                                   </div>
 
@@ -113,21 +120,59 @@
                                       <div class="card"> <img class="card-img-top" src="img/1.jpg" alt="Card image cap">
                                         <div class="card-body">
                                           <h5 class="card-title" id="temperature">Loading temperature</h5>
-                                          <p class="card-text">Currenty weather in <f id="neighbor"></f>.</p>
+                                          <p class="card-text">Currenty weather in <f id="neighbor">loading neighbor </f>.</p>
                                           <p>Condition: <f id="condition">Loading condition</f></p>
                                           <!-- <a onclick="weatherMore();this.onclick=null;" href="" class="btn btn-primary btn-sm">Read more</a> -->
-                                          <f id="weatherMore"></f>
-                                          <f id="sunset"></f>
+                                         
+                                          <!-- div for detailed information about weather -->
+                                <div>   
+                                  <div class="row"> 
+                                    <div class="col">Maximum:</div> 
+                                    <div class="col" id="temp_max">maximum temperature</div> 
+                                  </div>
+                                  
+                                  <div class="row">
+                                      <div class="col">Minimum:</div>
+                                      <div class="col" id="temp_min">minimum temperature</div> 
+                                  </div> 
+                                  
+                                  <div class="row"> 
+                                    <div class="col">Windy:</div> 
+                                    <div class="col" id="windspeed">wind speed</div> 
+                                  </div> 
+                                  
+                                  <div class="row"> 
+                                    <div class="col">Humidity:</div> 
+                                    <div class="col" id="humidity">humidity</div> 
+                                  </div> 
+                                  
+                                  <div class="row"> 
+                                    <div class="col">Pressure:</div> 
+                                    <div class="col" id="pressure">pressure</div> 
+                                  </div>
+
+                                  <div class="row"> 
+                                      <div class="col">Sunrise:</div> 
+                                      <div class="col" id="sunriseDIV">sunrise</div> 
+                                  </div>
+
+                                  <div class="row"> 
+                                        <div class="col">Sunset:</div> 
+                                        <div class="col" id="sunsetDIV">Sunset</div> 
+                                  </div>
+                                </div>   
+                                          
                                         </div>
                                       </div>
                                     </div>
 
                                     <div class="col-12 col-sm-6 col-md-4">
-                                      <div class="card"> <img class="card-img-top" src="img/2.jpg" alt="Card image cap">
+                                      <div class="card"> <img class="card-img-top" src="img/airport.jpg" alt="Card image cap">
                                         <div class="card-body">
                                           <h5 class="card-title">Airport</h5>
                                           <p class="card-text" id="airport">Loadig nearest airport...</p>
-                                          <!-- <a href="#" class="btn btn-primary btn-sm">See Details</a> </div> -->
+                                          <!-- <a href="#" class="btn btn-primary btn-sm">See Details</a>  -->
+                                        </div>
                                       </div>
                                     </div>
                                     
@@ -135,7 +180,7 @@
                                       <div class="card"> <img class="card-img-top" src="img/3.jpg" alt="Card image cap">
                                         <div class="card-body">
                                           <h5 class="card-title">Currency converter:</h5>
-                                          <p class="card-text"><F id="localCurrency"></F>
+                                          <p class="card-text"><F id="localCurrency">loading local currency</F>
                                                   <div class="item-inner">
                                                       <div class="row">
                                                             <div class="col">
@@ -152,21 +197,23 @@
                                                                       <option value="Won">South Korean won</option>
                                                                   </select>
                                                             </div>
-                                                      </div>
-                                                            <div id="divSelectionOfCurrency"></div>  
+                                                      </div><br>
+
+                                                            <div id="divSelectionOfCurrency">loading second currency selection</div>  
                                                   </div>
                                            </p>
-                                          <!-- <a href="#" class="btn btn-primary btn-sm">See Details</a> </div> -->
+                                          <!-- <a href="#" class="btn btn-primary btn-sm">See Details</a>  -->
+                                        </div>
                                       </div>
                                     </div>
-
+                                    
 
                                     <div class="col-12 col-sm-6 col-md-4">
-                                      <div class="card"> <img class="card-img-top" src="img/4.jpg" alt="Card image cap">
+                                      <div class="card"> <img class="card-img-top" src="img/map.jpg" alt="Card image cap">
                                         <div class="card-body">
-                                          <h5 class="card-title">Project title</h5>
-                                          <p class="card-text">Project description goes here ...</p>
-                                          <a href="#" class="btn btn-primary btn-sm">See Details</a> </div>
+                                          <h5 class="card-title">Map of the city!</h5>
+                                          <p class="card-text" id="map">Project description goes here ...</p>
+                                          <a href="#" class="btn btn-primary btn-sm" onclick="refreshMap()">See your location!</a> </div>
                                       </div>
                                     </div>
                                     
@@ -195,27 +242,14 @@
                                 </div>
                               </section>
   
-    <p id="actualDate">Loading actualDate</p>
+    <!-- <p id="accelerometer">Loading accelerometer</p> -->
                             <!-- <button onclick="home()"> See home address!! </button> -->
-                            <!-- <div id="map">A map should have appeared here!</div> -->
-                            <br>
+                            
                             <button onclick="shake()" class="button button-round button-fill">Shake it! </button>
-<br>
-        <div id="phoneCall">Loading country code</div>
 
-    <!-- div for map -->
-    <div class="row">
-        <div class="card demo-card-header-pic col">
-                <div style="background-image:url(http://www.sclance.com/pngs/google-maps-logo-png/google_maps_logo_png_595148.png)" class="card-header align-items-flex-end"></div>
-                <div class="card-content card-content-padding">
-                  <p id="map"></p>
-                </div>
-                <div class="card-footer"><button onclick="refreshMap()" class="button button-round button-fill">See your location.</button></div>
-              </div>
-    </div>
-<!-- end div for map -->
+        <div id="phoneCall">Loading country code</div>
                             <!-- Link to another page -->
-                            <a href="about.html">About app</a>
+                            <!-- <a href="about.html">About app</a> -->
                         </div>
                     </div>
                 </div>
@@ -230,7 +264,8 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 
     <script src="phonegap.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyApFPNQ2WxbEueUXMJBPHjLenlPnFo68ls&callback=initMap"></script>
+    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyApFPNQ2WxbEueUXMJBPHjLenlPnFo68ls&callback=initMap"></script> -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyApFPNQ2WxbEueUXMJBPHjLenlPnFo68ls"></script>
 
 </body>
 </html>

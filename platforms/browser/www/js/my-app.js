@@ -15,7 +15,7 @@ var mainView = myApp.addView('.view-main', {
 $$(document).on('deviceready', function() {
     // // console.log("Device is ready!");
     //start watch is for the device motion
-    // startWatch();    
+    startWatch();    
     getLocation();
 });
 
@@ -52,6 +52,7 @@ $$(document).on('pageInit', '.page[data-page="about"]', function (e) {
 
 // THIS IS THE FUNCTION THAT WILL READ THE ACCELEROMETER
 var watchID = null;
+
 function startWatch(){
 
     // Notice that the function takes two callbacks (accCallback and onError) and
@@ -63,13 +64,14 @@ function startWatch(){
 
 // accCallback. This is the function in charge of 
 // displayiing the acceleration on the front end
+
 function accCallback(acceleration){
 
-    var element = document.getElementById('accelerometer');
-	element.innerHTML = 'Acceleration X: ' + acceleration.x + '<br>' +
-			      'Acceleration Y: ' + acceleration.y + '<br>' +
-			      'Acceleration Z: ' + acceleration.z + '<br>' +
-			      'Timestamp: ' + acceleration.timestamp + '<br>';
+    // var element = document.getElementById('accelerometer');
+	// element.innerHTML = 'Acceleration X: ' + acceleration.x + '<br>' +
+	// 		      'Acceleration Y: ' + acceleration.y + '<br>' +
+	// 		      'Acceleration Z: ' + acceleration.z + '<br>' +
+	// 		      'Timestamp: ' + acceleration.timestamp + '<br>';
 
 }
 
@@ -91,29 +93,29 @@ function geoCallback(position){
     lon =  position.coords.longitude;
     
     opencageAPI();
-    // refreshMap();
     displayWeather();
     printFlag();
-    // currencyExchange();
     nearestAirport();
+    initMap();
+    todayDate();
 }
 
 function initMap() {
-    var cct = {lat: 53.3458902, lng: -6.2575};
+    var yourLocation = {lat: lat, lng: lon};
     var map = new
    google.maps.Map(document.getElementById('map'),
-   { zoom: 15,
-    center: cct
+   { zoom: 6,
+    center: yourLocation
     }
     );
     var marker = new google.maps.Marker({
-    position: cct, 
+    position: yourLocation, 
     map: map
     });
-    var marker2 = new google.maps.Marker({
-        position: home,
-        map: map
-        });
+    // var marker2 = new google.maps.Marker({
+    //     position: home,
+    //     map: map
+    //     });
 
    }
 
@@ -132,19 +134,19 @@ function refreshMap(){
     });
 }
 
-function home(){
-    var home = {lat: 53.318627, lng: -6.288998};
-     var map = new
-     google.maps.Map(document.getElementById('map'),
-     { zoom: 15,
-      center: home
-      }
-      );
-      var marker = new google.maps.Marker({
-      position: home, 
-      map: map
-      });
-}
+// function home(){
+//     var home = {lat: 53.318627, lng: -6.288998};
+//      var map = new
+//      google.maps.Map(document.getElementById('map'),
+//      { zoom: 15,
+//       center: home
+//       }
+//       );
+//       var marker = new google.maps.Marker({
+//       position: home, 
+//       map: map
+//       });
+// }
 
 //opencageAPI is the function that get city, currency and country
 
@@ -162,12 +164,11 @@ function opencageAPI(){
     http.onreadystatechange = (e) => {
         var response = http.responseText;
         var responseJSON = JSON.parse(response);
-        // console.log(responseJSON);
+
         var city =  responseJSON.results[0].components.city;
         var country =  responseJSON.results[0].components.country;
         currency =  responseJSON.results[0].annotations.currency.name;
         var callingcode = responseJSON.results[0].annotations.callingcode;
-        var actualDate = responseJSON.timestamp.created_http;
        
         welcome = "Welcome to " + city + ", "+ country + ".";
         localCurrency = "Local currency: " + currency + ".";
@@ -175,8 +176,7 @@ function opencageAPI(){
         document.getElementById('phoneCall').innerHTML = phoneCall; 
         document.getElementById('welcome').innerHTML = welcome; 
         document.getElementById('localCurrency').innerHTML = localCurrency; 
-        document.getElementById('actualDate').innerHTML = actualDate; 
-        // document.getElementById('city').innerHTML = city; 
+        // document.getElementById('actualDate').innerHTML = actualDate; 
 
         currencyExchange();
 
@@ -212,21 +212,26 @@ function displayWeather(){
          humidity = responseJSONWeather.main.humidity;
          condition = responseJSONWeather.weather[0].description;
          neighbor = responseJSONWeather.name;
-         WindSpeed =  responseJSONWeather.wind.speed;
-         Windy = WindSpeed+" km/h";
+         windspeed =  responseJSONWeather.wind.speed;
+         windspeed = windspeed +" km/h";
          pressure =  responseJSONWeather.main.pressure;
          temp_max =  responseJSONWeather.main.temp_max;
+         temp_max = temp_max + "&#176 degree";
          temp_min =  responseJSONWeather.main.temp_min;
+         temp_min = temp_min + "&#176 degree";
          sunrise =  responseJSONWeather.sys.sunrise;
          sunset =  responseJSONWeather.sys.sunset;
+
+
         document.getElementById('condition').innerHTML = condition; 
         document.getElementById('temperature').innerHTML = temperature; 
-        document.getElementById('neighbor').innerHTML = neighbor; 
+        document.getElementById('neighbor').innerHTML = neighbor;
+        document.getElementById('temp_max').innerHTML = temp_max; 
+        document.getElementById('temp_min').innerHTML = temp_min; 
+        document.getElementById('windspeed').innerHTML = windspeed; 
+        document.getElementById('humidity').innerHTML = humidity; 
+        document.getElementById('pressure').innerHTML = pressure; 
 
-
-        var weatherMore = "<div class='row'> <div class='col'>Maximum:</div> <div class='col'>" + temp_max + "&#176degree<br> </div> </div> <div class='row'> <div class='col'>Minimum:</div> <div class='col'>" + temp_min + "&#176degree<br> </div> </div> <div class='row'> <div class='col'>Windy:</div> <div class='col'>" + Windy + "<br> </div> </div> <div class='row'> <div class='col'>Humidity:</div> <div class='col'>" + humidity + "<br> </div> </div> <div class='row'> <div class='col'>Pressure:</div> <div class='col'>" + pressure + "<br> </div> </div>";
-        document.getElementById('weatherMore').innerHTML = weatherMore; 
-        // timeStampConverter(sunset);
         timeConverter();
 
         } 
@@ -249,7 +254,6 @@ function weatherMore(){
 
     document.getElementById('weatherMore').innerHTML = weatherMore; 
 
-    // timeStampConverter(sunset);
 
 }
 
@@ -305,9 +309,9 @@ function currencyExchange(){
        
        //fill the field ammount in dolar with one dolar.
          document.getElementById('AmmountMoney').value = USDUSD; 
+    
         var divSelectionOfCurrency = "<div class='row'> <div class='col'> <input type='number' id='numberTwo' class='' disabled> </div> <div class='col'> <select oninput='calcT()' onchange='calcT()' id='CurrencySelection'> <option value='"+currency+"'>"+currency+"</option> <option value='Reais'>Brazilian Real</option> <option value='Pound'>Pound sterling</option> <option value='Dollar'>United States Dollar</option> <option value='Yen'>Japanese Yen</option> <option value='Won'>South Korean won</option> </select> </div></div>";
          document.getElementById('divSelectionOfCurrency').innerHTML = divSelectionOfCurrency; 
-
 
          calcT();
          Real =  USDUSD / USDBRL;
@@ -542,12 +546,21 @@ function readFile(fileEntry) {
     var minSunrise = newSunrise.getMinutes();
     var secSunrise = newSunrise.getSeconds();
     timeSunrise = hourSunrise + ':' + minSunrise + ':' + secSunrise ;
-    console.log(timeSunset + " timeSunset");
-    console.log(timeSunrise + " timeSunrise");
+    
+    // // accelerationTimestamp
+    // var time = new Date(accelerationTimestamp * 1000);
+    // var year = time.getFullYear();
+    // var month = months[time.getMonth()];
+    // var date = time.getDate();
+    // var hour = time.getHours();
+    // var min = time.getMinutes();
+    // var sec = time.getSeconds();
+    // var timeNow = year + " " + date + " " + month + " " + hour + ':' + minSunrise + ':' + secSunrise ;
+    
 
-    sunsetDIV = "Sunset: " + timeSunset + "<br>Sunrise: " + timeSunrise;
-
-    document.getElementById('sunset').innerHTML = sunsetDIV; 
+    // document.getElementById('timeNow').innerHTML = timeNow; 
+    document.getElementById('sunsetDIV').innerHTML = timeSunset; 
+    document.getElementById('sunriseDIV').innerHTML = timeSunrise; 
 
 }
 
@@ -591,4 +604,23 @@ function readFile(fileEntry) {
 function onError(msg){
     console.log("onError called");
     console.log(msg);
+}
+
+function todayDate(){
+var objToday = new Date(),
+	weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'),
+	dayOfWeek = weekday[objToday.getDay()],
+	domEnder = function() { var a = objToday; if (/1/.test(parseInt((a + "").charAt(0)))) return "th"; a = parseInt((a + "").charAt(1)); return 1 == a ? "st" : 2 == a ? "nd" : 3 == a ? "rd" : "th" }(),
+	dayOfMonth = today + ( objToday.getDate() < 10) ? '0' + objToday.getDate() + domEnder : objToday.getDate() + domEnder,
+	months = new Array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'),
+	curMonth = months[objToday.getMonth()],
+	curYear = objToday.getFullYear(),
+	curHour = objToday.getHours() > 12 ? objToday.getHours() - 12 : (objToday.getHours() < 10 ? "0" + objToday.getHours() : objToday.getHours()),
+	curMinute = objToday.getMinutes() < 10 ? "0" + objToday.getMinutes() : objToday.getMinutes(),
+	curSeconds = objToday.getSeconds() < 10 ? "0" + objToday.getSeconds() : objToday.getSeconds(),
+	curMeridiem = objToday.getHours() > 12 ? "PM" : "AM";
+// var today = curHour + ":" + curMinute + "." + curSeconds + curMeridiem + " " + dayOfWeek + " " + dayOfMonth + " of " + curMonth + ", " + curYear;
+var today = dayOfWeek + ", " + dayOfMonth + " " + curMonth + " of " + curYear;
+document.getElementById('timeNow').innerHTML = today;
+
 }
