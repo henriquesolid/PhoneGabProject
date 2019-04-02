@@ -13,7 +13,7 @@ var mainView = myApp.addView('.view-main', {
 
 // Handle Cordova Device Ready Event
 $$(document).on('deviceready', function() {
-    // console.log("Device is ready!");
+    // // console.log("Device is ready!");
     //start watch is for the device motion
     // startWatch();    
     getLocation();
@@ -57,7 +57,7 @@ function startWatch(){
     // Notice that the function takes two callbacks (accCallback and onError) and
     // a JSON object (options)
     watchID = navigator.accelerometer.watchAcceleration(accCallback, onError, options); 
-    // console.log("startwatch function started");
+    // // console.log("startwatch function started");
 
 }
 
@@ -81,12 +81,12 @@ var options = {
 
 function getLocation(){
     navigator.geolocation.getCurrentPosition(geoCallback, onError);
-     console.log("getLocation called"); 
+     // console.log("getLocation called"); 
 }
 var lat;
 var lon;
 function geoCallback(position){
-     console.log("geoCallback called");
+     // console.log("geoCallback called");
     lat =   position.coords.latitude;
     lon =  position.coords.longitude;
     
@@ -118,7 +118,7 @@ function initMap() {
    }
 
 function refreshMap(){
-    console.log("refreshMap called ");
+    // console.log("refreshMap called ");
     var point = {lat: lat, lng: lon};
     var map = new
    google.maps.Map(document.getElementById('map'),
@@ -152,7 +152,7 @@ var currency;
 var welcome;
 var localCurrency;
 function opencageAPI(){
-     console.log("opencageAPI called");
+     // console.log("opencageAPI called");
     var http = new XMLHttpRequest();
     // const url = 'https://api.opencagedata.com/geocode/v1/json?q=53.3458+-6.2575&key=9614ccc2a3db467aa291f7aaea02676c';
     const url = 'https://api.opencagedata.com/geocode/v1/json?q='+lat+'+'+lon+'&key=9614ccc2a3db467aa291f7aaea02676c';
@@ -162,19 +162,21 @@ function opencageAPI(){
     http.onreadystatechange = (e) => {
         var response = http.responseText;
         var responseJSON = JSON.parse(response);
-        console.log(responseJSON);
+        // console.log(responseJSON);
         var city =  responseJSON.results[0].components.city;
         var country =  responseJSON.results[0].components.country;
         currency =  responseJSON.results[0].annotations.currency.name;
         var callingcode = responseJSON.results[0].annotations.callingcode;
         var actualDate = responseJSON.timestamp.created_http;
+       
         welcome = "Welcome to " + city + ", "+ country + ".";
-        localCurrency = currency + " is the local currency.";
+        localCurrency = "Local currency: " + currency + ".";
         var phoneCall =  "If you need to make a phone call the country code is " + callingcode;
         document.getElementById('phoneCall').innerHTML = phoneCall; 
         document.getElementById('welcome').innerHTML = welcome; 
         document.getElementById('localCurrency').innerHTML = localCurrency; 
         document.getElementById('actualDate').innerHTML = actualDate; 
+        // document.getElementById('city').innerHTML = city; 
 
         currencyExchange();
 
@@ -194,16 +196,16 @@ function opencageAPI(){
     var sunset;
 //displayWeather is the function that get the weather
 function displayWeather(){
-    console.log("displayWeather called");
-    var http2 = new XMLHttpRequest();
+    // console.log("displayWeather called");
+    var http = new XMLHttpRequest();
 //  const url = 'http://api.openweathermap.org/data/2.5/weather?lat=35&lon=139&units=metric&appid=c161f2e8363f6ef8be3d9cc89baf322e';
     const url = 'http://api.openweathermap.org/data/2.5/weather?lat='+lat+'&'+'lon='+lon+'&units=metric&appid=c161f2e8363f6ef8be3d9cc89baf322e';
-    http2.open("GET", url);
-    http2.send();
+    http.open("GET", url);
+    http.send();
 
-    http2.onreadystatechange = (e) => {
-        var responseWeather = http2.responseText;
-        var responseJSONWeather = JSON.parse(responseWeather);
+    http.onreadystatechange = (e) => {
+        var responseWeather = http.responseText;
+        responseJSONWeather = JSON.parse(responseWeather);
         
          temperature =  responseJSONWeather.main.temp;
          temperature ="<f id='degree'>" + temperature + "&#176 degree </f>";
@@ -217,31 +219,37 @@ function displayWeather(){
          temp_min =  responseJSONWeather.main.temp_min;
          sunrise =  responseJSONWeather.sys.sunrise;
          sunset =  responseJSONWeather.sys.sunset;
-
         document.getElementById('condition').innerHTML = condition; 
         document.getElementById('temperature').innerHTML = temperature; 
         document.getElementById('neighbor').innerHTML = neighbor; 
+
+
+        var weatherMore = "<div class='row'> <div class='col'>Maximum:</div> <div class='col'>" + temp_max + "&#176degree<br> </div> </div> <div class='row'> <div class='col'>Minimum:</div> <div class='col'>" + temp_min + "&#176degree<br> </div> </div> <div class='row'> <div class='col'>Windy:</div> <div class='col'>" + Windy + "<br> </div> </div> <div class='row'> <div class='col'>Humidity:</div> <div class='col'>" + humidity + "<br> </div> </div> <div class='row'> <div class='col'>Pressure:</div> <div class='col'>" + pressure + "<br> </div> </div>";
+        document.getElementById('weatherMore').innerHTML = weatherMore; 
+        // timeStampConverter(sunset);
+        timeConverter();
+
         } 
     
 }
 
 function weatherMore(){
 
-    // temp_max = "Maximum: " + temp_max + "&#176 degree<br>";
-    // temp_min = "Minimum: " + temp_min + "&#176 degree<br>";
-    // Windy = "Windy: " + Windy + "<br>";
-    // humidity = "Humidity: " + humidity + "<br>";
-    // pressure = "pressure: " + pressure + "<br>";
+    temp_max = "Maximum: " + temp_max + "&#176 degree<br>";
+    temp_min = "Minimum: " + temp_min + "&#176 degree<br>";
+    Windy = "Windy: " + Windy + "<br>";
+    humidity = "Humidity: " + humidity + "<br>";
+    pressure = "pressure: " + pressure + "<br>";
 
 
-    // sunrise = "sunrise: " + sunrise + "<br>";
+    sunrise = "sunrise: " + sunrise + "<br>";
     
-    // var weatherMore = temp_max + temp_min + Windy + humidity + pressure;
+    var weatherMore = temp_max + temp_min + Windy + humidity + pressure;
     var weatherMore = "<div class='row'> <div class='col'>Maximum:</div> <div class='col'>" + temp_max + "&#176degree<br> </div> </div> <div class='row'> <div class='col'>Minimum:</div> <div class='col'>" + temp_min + "&#176degree<br> </div> </div> <div class='row'> <div class='col'>Windy:</div> <div class='col'>" + Windy + "<br> </div> </div> <div class='row'> <div class='col'>Humidity:</div> <div class='col'>" + humidity + "<br> </div> </div> <div class='row'> <div class='col'>Pressure:</div> <div class='col'>" + pressure + "<br> </div> </div>";
 
     document.getElementById('weatherMore').innerHTML = weatherMore; 
 
-    timeStampConverter(sunset);
+    // timeStampConverter(sunset);
 
 }
 
@@ -265,41 +273,41 @@ var Yen;
 var Won;
 // currencyExchange is the function that get currenty currency
 function currencyExchange(){
-   console.log("currencyExchange called");
+   // console.log("currencyExchange called");
     //store in a variable the http request
-    var httpCurrencyExchange = new XMLHttpRequest();    
+    var http = new XMLHttpRequest();    
     //http://apilayer.net/api/live?access_key=0c926538381be4e7284c7b41ed282fda&convert?from=EUR&to=GBP&amount=100
 
     //create a variable with the URL that has the JSON
     const url = 'http://www.apilayer.net/api/live?access_key=0c926538381be4e7284c7b41ed282fda';
   //GET THE INFORMATION
-    httpCurrencyExchange.open("GET", url);
-    httpCurrencyExchange.send();
+    http.open("GET", url);
+    http.send();
 
 
 //READY THE HTTP REQUEST
-    httpCurrencyExchange.onreadystatechange = (e) => {
+    http.onreadystatechange = (e) => {
           
         //STORE IN A VARIABLE THE HTTP RESPONSE
-        var responseCurrencyExchange = httpCurrencyExchange.responseText;
+        var responseCurrencyExchange = http.responseText;
 
         //TRANSLTE THE RESPONSE IN JSON
-        var responseCurrencyExchangeJson = JSON.parse(responseCurrencyExchange);
+        var responseCurrencyExchange = JSON.parse(responseCurrencyExchange);
         
         //CREATE A VARIABLE WITH DOLLAT TO EURO, FROM THE JSON ANSWER
         //the .toprecision makes it with the number of caracter, example euro we need just the first tree digits.
-           USDUSD =  responseCurrencyExchangeJson.quotes.USDUSD.toPrecision(3);
-           USDEUR =  responseCurrencyExchangeJson.quotes.USDEUR.toPrecision(2);
-           USDBRL =  responseCurrencyExchangeJson.quotes.USDBRL.toPrecision(3);
-           USDGBP =  responseCurrencyExchangeJson.quotes.USDGBP.toPrecision(3);
-           USDJPY =  responseCurrencyExchangeJson.quotes.USDJPY.toPrecision(5);
-           USDKRW =  responseCurrencyExchangeJson.quotes.USDKRW.toPrecision(6);
+           USDUSD =  responseCurrencyExchange.quotes.USDUSD.toPrecision(3);
+           USDEUR =  responseCurrencyExchange.quotes.USDEUR.toPrecision(2);
+           USDBRL =  responseCurrencyExchange.quotes.USDBRL.toPrecision(3);
+           USDGBP =  responseCurrencyExchange.quotes.USDGBP.toPrecision(3);
+           USDJPY =  responseCurrencyExchange.quotes.USDJPY.toPrecision(5);
+           USDKRW =  responseCurrencyExchange.quotes.USDKRW.toPrecision(6);
        
        //fill the field ammount in dolar with one dolar.
          document.getElementById('AmmountMoney').value = USDUSD; 
-         var divSelectionOfCurrency = "<div class='row'> <div class='col'> <input type='number' id='numberTwo' class='' disabled> </div> <div class='col'> <select oninput='calcT()' onchange='calcT()' id='CurrencySelection'> <option value='"+currency+"'>"+currency+"</option> <option value='Reais'>Brazilian Real</option> <option value='Pound'>Pound sterling</option> <option value='Dollar'>United States Dollar</option> <option value='Yen'>Japanese Yen</option> <option value='Won'>South Korean won</option> </select> </div></div>";
-
+        var divSelectionOfCurrency = "<div class='row'> <div class='col'> <input type='number' id='numberTwo' class='' disabled> </div> <div class='col'> <select oninput='calcT()' onchange='calcT()' id='CurrencySelection'> <option value='"+currency+"'>"+currency+"</option> <option value='Reais'>Brazilian Real</option> <option value='Pound'>Pound sterling</option> <option value='Dollar'>United States Dollar</option> <option value='Yen'>Japanese Yen</option> <option value='Won'>South Korean won</option> </select> </div></div>";
          document.getElementById('divSelectionOfCurrency').innerHTML = divSelectionOfCurrency; 
+
 
          calcT();
          Real =  USDUSD / USDBRL;
@@ -314,7 +322,7 @@ var CurrencySelection;
 var FromCurrencySelection;
 var FromCurrencyToDollar;
 function calcT(){
-    console.log("calcT called");
+    // console.log("calcT called");
     AmmountMoney = document.getElementById('AmmountMoney').value; 
     AmmountMoney = parseInt(AmmountMoney);
   
@@ -399,21 +407,19 @@ var airportName;
 // nearest airport information
 //nearestAirport is the function that get the weather
 function nearestAirport(){
-     console.log("nearestAirport called");
+     // console.log("nearestAirport called");
     
-     var httpAirport = new XMLHttpRequest();
-    //  console.log("lon"+lon);
-    //  console.log("lat"+lat);
+     var http = new XMLHttpRequest();
     //const url = 'http://iatacodes.org/api/v6/nearby?api_key=e6d5fae9-f7b9-4d1a-a219-08a0a5447427&lat=53.3458902&lng=-6.2575&distance=100';
     //  const url = 'http://iatacodes.org/api/v6/nearby?api_key=e6d5fae9-f7b9-4d1a-a219-08a0a5447427&lat='+lat+'&'+'lng='+lon+'&distance=100';
       const url = 'http://iatacodes.org/api/v6/nearby?api_key=YOUR-API-KEY&lat='+lat+'&'+'lng='+lon+'&distance=100';
-     console.log("url do airport");
-     console.log(url)
-    httpAirport.open("GET", url);
-    httpAirport.send();
+     // console.log("url do airport");
+     // console.log(url)
+    http.open("GET", url);
+    http.send();
 
-    httpAirport.onreadystatechange = (e) => {     
-        var responseAirport = httpAirport.responseText;
+    http.onreadystatechange = (e) => {     
+        var responseAirport = http.responseText;
         responseAirport = JSON.parse(responseAirport);
         airportCode =  responseAirport.response[0].code;
         airportName =  responseAirport.response[0].name;
@@ -428,18 +434,18 @@ function nearestAirport(){
 
 function shake(){
     navigator.vibrate(1000);
-     console.log("shaking working!");
+     // console.log("shaking working!");
 }
 
 function tryingFile(){
-    console.log("tryingFile called");
+    // console.log("tryingFile called");
 //get access to file system
     window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, fileSystemCallback, onError
     );
 }
 
 function fileSystemCallback(fs){
-    console.log("fileSystemCallback called");
+    // console.log("fileSystemCallback called");
 
     // Name of the file I want to create
     var fileToCreate = "newPersistentFile.txt";
@@ -449,13 +455,13 @@ function fileSystemCallback(fs){
 }
 
 var fileSystemOptionals = { create: true, exclusive: false };
-console.log("fileSystemOptionals called");
+// console.log("fileSystemOptionals called");
 
 
 //after file system called, filesystem call back get the file system result and open/create the file
 //getfilecallback create a file with the 
 function getFileCallback(fileEntry){
-    console.log("getFileCallback called");
+    // console.log("getFileCallback called");
 
     var textInsert = document.getElementById('yourText').value;
     var dataObj = new Blob([textInsert], { type: 'text/plain' });
@@ -469,7 +475,7 @@ function getFileCallback(fileEntry){
 
 // Let's write some files
 function writeFile(fileEntry, dataObj) {
-    console.log("writeFile called");
+    // console.log("writeFile called");
 
     // Create a FileWriter object for our FileEntry (log.txt).
     fileEntry.createWriter(function (fileWriter) {
@@ -483,11 +489,11 @@ function writeFile(fileEntry, dataObj) {
         fileWriter.write(dataObj);
 
         fileWriter.onwriteend = function() {
-            console.log("Successful file write...");
+            // console.log("Successful file write...");
         };
 
         fileWriter.onerror = function (e) {
-            console.log("Failed file write: " + e.toString());
+            // console.log("Failed file write: " + e.toString());
         };
 
     });
@@ -495,7 +501,7 @@ function writeFile(fileEntry, dataObj) {
 var varFile;
 // Let's read some files
 function readFile(fileEntry) {
-    console.log("readFile called");
+    // console.log("readFile called");
 
     // Get the file from the file entry
     fileEntry.file(function (file) {
@@ -505,58 +511,84 @@ function readFile(fileEntry) {
         reader.readAsText(file);
 
         reader.onloadend = function() {
-            console.log("Successful file read: " + this.result);
+            // console.log("Successful file read: " + this.result);
             varFile = this.result;
-            console.log("file path: " + fileEntry.fullPath);
+            // console.log("file path: " + fileEntry.fullPath);
         };
 
     }, onError);
 }
 
-function tryinganother(){
-    console.log(varFile);
+ var timeSunrise;
+ var timeSunset;
+
+ function timeConverter(){
+    // var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+    var newSunset = new Date(sunset * 1000);
+    // var year = newSunset.getFullYear();
+    // var month = months[newSunrise.getMonth()];
+    // var date = newSunset.getDate();
+    var hourSunset = newSunset.getHours();
+    var minSunset = newSunset.getMinutes();
+    var secSunset = newSunset.getSeconds();
+    timeSunset = hourSunset + ':' + minSunset + ':' + secSunset ;
+
+    var newSunrise = new Date(sunrise * 1000);
+    // var year = newSunrise.getFullYear();
+    // var month = months[newSunrise.getMonth()];
+    // var date = newSunrise.getDate();
+    var hourSunrise = newSunrise.getHours();
+    var minSunrise = newSunrise.getMinutes();
+    var secSunrise = newSunrise.getSeconds();
+    timeSunrise = hourSunrise + ':' + minSunrise + ':' + secSunrise ;
+    console.log(timeSunset + " timeSunset");
+    console.log(timeSunrise + " timeSunrise");
+
+    sunsetDIV = "Sunset: " + timeSunset + "<br>Sunrise: " + timeSunrise;
+
+    document.getElementById('sunset').innerHTML = sunsetDIV; 
+
 }
 
+//   var sunsetResponse;
+//   // timestamp converter for weather
+//   function timeStampConverter(){
+//       // console.log("timeStampConverter called");
+//       // console.log(sunset + " sunset");
+//        //store in a variable the http request
+//        var http = new XMLHttpRequest();    
+//        //https://helloacm.com/api/unix-timestamp-converter/?cached&s=1553667088
+   
+  
+//        // console.log(sunset + " translateThis");
+//        //create a variable with the URL that has the JSON
+//        const url = "https://helloacm.com/api/unix-timestamp-converter/?cached&s=" + sunset;
+//        //const url = 'https://helloacm.com/api/unix-timestamp-converter/?cached&s=1553667088';
+  
+//        // console.log(url);
+//      //GET THE INFORMATION
+//        http.open("GET", url);
+//        http.send();
+     
+//    //READY THE HTTP REQUEST
+//       http.onreadystatechange = (e) => {
+          
+//            //STORE IN A VARIABLE THE HTTP RESPONSE
+//            var sunsetResponse = http.responseText;
+                         
+//               //TRANSLTE THE RESPONSE IN JSON
+//            sunsetResponse = JSON.parse(sunsetResponse);
+  
+//           var sunsetDIV = "<div class='row'> <div class='col'> Sunset: </div> <div class='col'>" + sunsetResponse + "</div> </div>";
+  
+//           //fill the field ammount in dolar with one dolar.
+//             document.getElementById('sunset').innerHTML = sunsetDIV; 
+  
+//        }
+//    }
+   
 function onError(msg){
     console.log("onError called");
     console.log(msg);
 }
-var sunsetResponse;
-// timestamp converter for weather
-function timeStampConverter(){
-    console.log("timeStampConverter called");
-    console.log(sunset + " sunset");
-     //store in a variable the http request
-     var http = new XMLHttpRequest();    
-     //https://helloacm.com/api/unix-timestamp-converter/?cached&s=1553667088
- 
-
-     var translateThis;
-     translateThis = '1553667088';
-     console.log(sunset + " translateThis");
-     //create a variable with the URL that has the JSON
-     const url = "https://helloacm.com/api/unix-timestamp-converter/?cached&s=" + sunset;
-     //const url = 'https://helloacm.com/api/unix-timestamp-converter/?cached&s=1553667088';
-
-     console.log(url);
-   //GET THE INFORMATION
-     http.open("GET", url);
-     http.send();
-   
- //READY THE HTTP REQUEST
-    http.onreadystatechange = (e) => {
-        
-         //STORE IN A VARIABLE THE HTTP RESPONSE
-         var sunsetResponse = http.responseText;
-                       
-            //TRANSLTE THE RESPONSE IN JSON
-         var sunsetResponse = JSON.parse(sunsetResponse);
-        console.log(sunsetResponse + " sunsetResponse");
-
-        var sunsetDIV = "<div class='row'> <div class='col'> Sunset: </div> <div class='col'>" + sunsetResponse + "</div> </div>";
-
-        //fill the field ammount in dolar with one dolar.
-          document.getElementById('sunset').innerHTML = sunsetDIV; 
-
-     }
- }

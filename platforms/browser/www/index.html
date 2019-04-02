@@ -38,6 +38,9 @@
     
     <!-- Custom CSS styles -->
     <link rel="stylesheet" href="css/styles.css">
+
+
+    
 </head>
 
 <body>
@@ -89,12 +92,11 @@
                         <!-- element card at below div gives the white background -->
 
                         <!-- <div class="content-block"> -->
-                
                             <header id="page-header">
                                 <div class="jumbotron jumbotron-fluid bg-light">
                                   <div class="container text-center"> <img class="img-fluid rounded-circle" src="img/user.png">
                                     <h2 id="welcome">Welcome...</h2>
-                                    <p class="lead">Here you will find examples of my work.</p>
+                                    <p class="lead">Here you will find priceless information about this country.</p>
                                     <a class="btn social-icons" href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a> <a class="btn social-icons" href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a> <a class="btn social-icons" href="#"><i class="fa fa-behance" aria-hidden="true"></i></a> <a class="btn social-icons" href="#"><i class="fa fa-500px" aria-hidden="true"></i></a> <a class="btn social-icons" href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a> </div>
                                 </div>
                               </header>
@@ -102,34 +104,63 @@
                                 <div class="container">
                                   <div class="row">
                                     <div class="col-12 text-center">
-                                      <h3 class="section-title">Traveller helper Section</h3>
+                                      <h3 class="section-title">Traveller Helper!</h3>
                                     </div>
                                   </div>
+
                                   <div class="row">
                                     <div class="col-12 col-sm-6 col-md-4">
                                       <div class="card"> <img class="card-img-top" src="img/1.jpg" alt="Card image cap">
                                         <div class="card-body">
-                                          <h5 class="card-title">Project title</h5>
-                                          <p class="card-text">Project description goes here ...</p>
-                                          <a href="#" class="btn btn-primary btn-sm">See Details</a> </div>
+                                          <h5 class="card-title" id="temperature">Loading temperature</h5>
+                                          <p class="card-text">Currenty weather in <f id="neighbor"></f>.</p>
+                                          <p>Condition: <f id="condition">Loading condition</f></p>
+                                          <!-- <a onclick="weatherMore();this.onclick=null;" href="" class="btn btn-primary btn-sm">Read more</a> -->
+                                          <f id="weatherMore"></f>
+                                          <f id="sunset"></f>
+                                        </div>
                                       </div>
                                     </div>
+
                                     <div class="col-12 col-sm-6 col-md-4">
                                       <div class="card"> <img class="card-img-top" src="img/2.jpg" alt="Card image cap">
                                         <div class="card-body">
-                                          <h5 class="card-title">Project title</h5>
-                                          <p class="card-text">Project description goes here ...</p>
-                                          <a href="#" class="btn btn-primary btn-sm">See Details</a> </div>
+                                          <h5 class="card-title">Airport</h5>
+                                          <p class="card-text" id="airport">Loadig nearest airport...</p>
+                                          <!-- <a href="#" class="btn btn-primary btn-sm">See Details</a> </div> -->
                                       </div>
                                     </div>
+                                    
                                     <div class="col-12 col-sm-6 col-md-4">
                                       <div class="card"> <img class="card-img-top" src="img/3.jpg" alt="Card image cap">
                                         <div class="card-body">
-                                          <h5 class="card-title">Project title</h5>
-                                          <p class="card-text">Project description goes here ...</p>
-                                          <a href="#" class="btn btn-primary btn-sm">See Details</a> </div>
+                                          <h5 class="card-title">Currency converter:</h5>
+                                          <p class="card-text"><F id="localCurrency"></F>
+                                                  <div class="item-inner">
+                                                      <div class="row">
+                                                            <div class="col">
+                                                              <input oninput="calcT()" onchange="calcT()" type="number" min="1" max="9999999" id="AmmountMoney" class="" pattern= "[0-9]+">
+                                                            </div>
+                                                            
+                                                            <div class="col item-inner">
+                                                                  <select oninput="calcT()" onchange="calcT()" id="FromCurrencySelection">
+                                                                      <option value="Dollar">United States Dollar</option>
+                                                                      <option value="Reais">Brazilian Real</option>
+                                                                      <option value="Pound">Pound sterling</option>
+                                                                      <option value="Euro">Euro</option>
+                                                                      <option value="Yen">Japanese Yen</option>
+                                                                      <option value="Won">South Korean won</option>
+                                                                  </select>
+                                                            </div>
+                                                      </div>
+                                                            <div id="divSelectionOfCurrency"></div>  
+                                                  </div>
+                                           </p>
+                                          <!-- <a href="#" class="btn btn-primary btn-sm">See Details</a> </div> -->
                                       </div>
                                     </div>
+
+
                                     <div class="col-12 col-sm-6 col-md-4">
                                       <div class="card"> <img class="card-img-top" src="img/4.jpg" alt="Card image cap">
                                         <div class="card-body">
@@ -138,122 +169,39 @@
                                           <a href="#" class="btn btn-primary btn-sm">See Details</a> </div>
                                       </div>
                                     </div>
+                                    
                                     <div class="col-12 col-sm-6 col-md-4">
-                                      <div class="card"> <img class="card-img-top" src="img/5.jpg" alt="Card image cap">
-                                        <div class="card-body">
-                                          <h5 class="card-title">Project title</h5>
-                                          <p class="card-text">Project description goes here ...</p>
-                                          <a href="#" class="btn btn-primary btn-sm">See Details</a> </div>
+                                        <div class="card"> <img class="card-img-top" src="img/4.jpg" alt="Card image cap">
+                                          <div class="card-body">
+                                            <h5 class="card-title">Project title</h5>
+                                            <p class="card-text">Project description goes here ...</p>
+                                            <a href="#" class="btn btn-primary btn-sm">See Details</a> </div>
+                                        </div>
                                       </div>
-                                    </div>
-                                    <div class="col-12 col-sm-6 col-md-4">
-                                      <div class="card"> <img class="card-img-top" src="img/6.jpg" alt="Card image cap">
-                                        <div class="card-body">
-                                          <h5 class="card-title">Project title</h5>
-                                          <p class="card-text">Project description goes here ...</p>
-                                          <a href="#" class="btn btn-primary btn-sm">See Details</a> </div>
-                                      </div>
-                                    </div>
-                                    <div class="col-12 col-sm-6 col-md-4">
-                                      <div class="card"> <img class="card-img-top" src="img/7.jpg" alt="Card image cap">
-                                        <div class="card-body">
-                                          <h5 class="card-title">Project title</h5>
-                                          <p class="card-text">Project description goes here ...</p>
-                                          <a href="#" class="btn btn-primary btn-sm">See Details</a> </div>
-                                      </div>
-                                    </div>
-                                    <div class="col-12 col-sm-6 col-md-4">
-                                      <div class="card"> <img class="card-img-top" src="img/8.jpg" alt="Card image cap">
-                                        <div class="card-body">
-                                          <h5 class="card-title">Project title</h5>
-                                          <p class="card-text">Project description goes here ...</p>
-                                          <a href="#" class="btn btn-primary btn-sm">See Details</a> </div>
-                                      </div>
-                                    </div>
-                                    <div class="col-12 col-sm-6 col-md-4">
-                                      <div class="card"> <img class="card-img-top" src="img/9.jpg" alt="Card image cap">
-                                        <div class="card-body">
-                                          <h5 class="card-title">Project title</h5>
-                                          <p class="card-text">Project description goes here ...</p>
-                                          <a href="#" class="btn btn-primary btn-sm">See Details</a> </div>
-                                      </div>
-                                    </div>
+
+                                    <!-- default -->
+                                    <!-- <div class="col-12 col-sm-6 col-md-4">
+                                        <div class="card"> <img class="card-img-top" src="img/4.jpg" alt="Card image cap">
+                                          <div class="card-body">
+                                            <h5 class="card-title">Project title</h5>
+                                            <p class="card-text">Project description goes here ...</p>
+                                            <a href="#" class="btn btn-primary btn-sm">See Details</a> </div>
+                                        </div>
+                                      </div> -->
+                                      <!-- end default -->
+
+
                                   </div>
                                 </div>
                               </section>
-    <div class="row">
-
-        <div class="card demo-card-header-pic col">
-            <div style="background-image:url(https://cdn.framework7.io/placeholder/nature-1000x600-3.jpg)" class="card-header align-items-flex-end" id="temperature">Loading temperature</div>
-            <div class="card-content card-content-padding">
-              <p class="date">Currenty weather in <f id="neighbor"></f></p>
-              Condition: <f id="condition">Loading condition</f><br>
-              
-            </div>
-            <div class="card-footer"><a onclick="weatherMore();this.onclick=null;" href="" class="link">Read more</a></div>
-              <f id="weatherMore"></f>
-              <f id="sunset"></f>
-
-            </div>
-          </div>
-    </div>
-    <div class="row">
-
-                  <div class="card demo-card-header-pic col">
-                    <div style="background-image:url(https://cdn.images.express.co.uk/img/dynamic/25/590x/Liverpool-Airport-Bank-holiday-strike-flights-1004169.jpg?r=1534421963960)" class="card-header align-items-flex-end"></div>
-                    <div class="card-content card-content-padding">
-                      <p id="airport">Loading nearest airport</p>
-                    </div>
-                    <!-- <div class="card-footer"><a href="#" class="link">Read more</a></div> -->
-                  </div>
-    </div>
+  
     <p id="actualDate">Loading actualDate</p>
-
-    <!-- start currency converter -->
-    <div id="localCurrency">Loading currency converter</div>
-    <form>
-     <div class="item-inner">
-     <!-- first currency field -->
-     
-
-     Currency converter:
-     <div class="row">
-        <div class="col">
-          <input oninput="calcT()" onchange="calcT()" type="number" id="AmmountMoney" class="">
-        </div>
-
-        <div class="col item-inner">
-            
-              <select oninput="calcT()" onchange="calcT()" id="FromCurrencySelection">
-                  <option value="Dollar">United States Dollar</option>
-                  <option value="Reais">Brazilian Real</option>
-                  <option value="Pound">Pound sterling</option>
-                  <option value="Euro">Euro</option>
-                  <option value="Yen">Japanese Yen</option>
-                  <option value="Won">South Korean won</option>
-              </select>
-          
-        </div>
-     </div>
-
-        <div id="divSelectionOfCurrency"></div>
-
-           
-     </div>
-   </form>
-
-<!-- end currency converter -->
-
-                            <!-- I've added this place to display the tilting of the phone -->
-                            
-                            
-                            <!-- <button onclick="getLocation()">Refresh location!! </button> -->
                             <!-- <button onclick="home()"> See home address!! </button> -->
                             <!-- <div id="map">A map should have appeared here!</div> -->
                             <br>
                             <button onclick="shake()" class="button button-round button-fill">Shake it! </button>
 <br>
-<div id="phoneCall">Loading country code</div>
+        <div id="phoneCall">Loading country code</div>
 
     <!-- div for map -->
     <div class="row">
@@ -264,7 +212,7 @@
                 </div>
                 <div class="card-footer"><button onclick="refreshMap()" class="button button-round button-fill">See your location.</button></div>
               </div>
-</div>
+    </div>
 <!-- end div for map -->
                             <!-- Link to another page -->
                             <a href="about.html">About app</a>
@@ -273,9 +221,8 @@
                 </div>
             </div>
         </div>
-        <div class="widget_wrap" style="width:320px;height:797px;display:inline-block;"><iframe src="https://www.zomato.com/widgets/res_search_widget.php?lat=53.33306&lon=-6.24889&language_id=1&theme=red&hideCitySearch=on&hideResSearch=on&widgetType=small&sort=distance" style="position:relative;width:100%;height:100%;" border="0" frameborder="0"></iframe></div>
-        <a class="twitter-timeline" data-width="400" data-height="400" data-theme="dark" href="https://twitter.com/CNN?ref_src=twsrc%5Etfw">Tweets by CNN</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-    </div>
+        <!-- <div class="widget_wrap" style="width:320px;height:797px;display:inline-block;"><iframe src="https://www.zomato.com/widgets/res_search_widget.php?lat=53.33306&lon=-6.24889&language_id=1&theme=red&hideCitySearch=on&hideResSearch=on&widgetType=small&sort=distance" style="position:relative;width:100%;height:100%;" border="0" frameborder="0"></iframe></div>
+        <a class="twitter-timeline" data-width="400" data-height="400" data-theme="dark" href="https://twitter.com/CNN?ref_src=twsrc%5Etfw">Tweets by CNN</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> -->
 
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="lib/framework7/js/framework7.min.js"></script>
@@ -284,5 +231,6 @@
 
     <script src="phonegap.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyApFPNQ2WxbEueUXMJBPHjLenlPnFo68ls&callback=initMap"></script>
+
 </body>
 </html>
