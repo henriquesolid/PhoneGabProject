@@ -65,7 +65,7 @@
 
     <!-- Views -->
     <div class="views">
-      
+
         <!-- Your main view, should have "view-main" class -->
         <div class="view view-main">
           
@@ -95,11 +95,15 @@
                     <div class="page-content ">
                     
                         <!-- element card at below div gives the white background -->
-
+                        <div> 
+                          <input type="text" id="yourText"></input>
+                          <button onclick=tryingFile()>tryingFile</button>
+                          <button onclick=tryinganother()>tryinganother</button>
+                      </div>
                         <!-- <div class="content-block"> -->
                             <header id="page-header">
                                 <div class="jumbotron jumbotron-fluid bg-light">
-                                  <div class="container text-center"> <img class="img-fluid rounded-circle" src="img/user.png">
+                                  <div class="container text-center"> <img class="img-fluid rounded-circle" id="flag">
                                     <h2 id="welcome">Welcome...</h2>
                                     <p class="lead">Here you will find priceless information about this country.</p>
                                     <f id="timeNow">Loading date...</f><br>

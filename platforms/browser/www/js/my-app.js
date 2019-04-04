@@ -76,11 +76,13 @@ function accCallback(acceleration){
 }
 
 // JSON object
+//the frequency that the acceleration updates
 var options = {
     frequency: 3000
 }
 // end device accelaration/motion
 
+//getLocation 
 function getLocation(){
     navigator.geolocation.getCurrentPosition(geoCallback, onError);
      // console.log("getLocation called"); 
@@ -94,11 +96,13 @@ function geoCallback(position){
     
     opencageAPI();
     displayWeather();
-    printFlag();
     nearestAirport();
     initMap();
     todayDate();
 }
+
+
+
 
 function initMap() {
     var yourLocation = {lat: lat, lng: lon};
@@ -194,6 +198,7 @@ function opencageAPI(){
     var temp_min;
     var sunrise;
     var sunset;
+    var countryCode;
 //displayWeather is the function that get the weather
 function displayWeather(){
     // console.log("displayWeather called");
@@ -206,6 +211,7 @@ function displayWeather(){
     http.onreadystatechange = (e) => {
         var responseWeather = http.responseText;
         responseJSONWeather = JSON.parse(responseWeather);
+        // console.log(responseJSONWeather);
         
          temperature =  responseJSONWeather.main.temp;
          temperature ="<f id='degree'>" + temperature + "&#176 degree </f>";
@@ -221,6 +227,8 @@ function displayWeather(){
          temp_min = temp_min + "&#176 degree";
          sunrise =  responseJSONWeather.sys.sunrise;
          sunset =  responseJSONWeather.sys.sunset;
+         countryCode = responseJSONWeather.sys.country;
+        //  console.log(countryCode + " countryCode");
 
 
         document.getElementById('condition').innerHTML = condition; 
@@ -233,6 +241,8 @@ function displayWeather(){
         document.getElementById('pressure').innerHTML = pressure; 
 
         timeConverter();
+        printFlag();
+        tryingFile();
 
         } 
     
@@ -257,8 +267,21 @@ function weatherMore(){
 
 }
 
+//function to print the flag
 function printFlag(){
-   
+//    console.log("printFlag called");
+
+
+//change the countrycode to lowercase to use it in the URL to the the flag
+   countryCode = countryCode.toLowerCase();
+
+//    <div class="container text-center"> <img class="img-fluid rounded-circle" src="img/user.png">
+// document.getElementById('flag').write("<img src='http://flags.fmcdn.net/data/flags/w580/ie.png'>");
+var flagUrl = document.getElementById('flag').src="http://flags.fmcdn.net/data/flags/w580/" + countryCode + ".png";
+// document.getElementById('flag').value="100";
+// var test = document.getElementById('flag').value;
+// console.log(test + " must be 100");
+
 }
 
 // currency below
@@ -442,33 +465,33 @@ function shake(){
 }
 
 function tryingFile(){
-    // console.log("tryingFile called");
+    console.log("tryingFile called");
 //get access to file system
     window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, fileSystemCallback, onError
     );
 }
 
 function fileSystemCallback(fs){
-    // console.log("fileSystemCallback called");
+    console.log("fileSystemCallback called");
 
     // Name of the file I want to create
-    var fileToCreate = "newPersistentFile.txt";
+    var fileToCreate = "filewithneighbors.txt";
 
     // Opening/creating the file
     fs.root.getFile(fileToCreate, fileSystemOptionals, getFileCallback, onError);
 }
 
 var fileSystemOptionals = { create: true, exclusive: false };
-// console.log("fileSystemOptionals called");
+console.log("fileSystemOptionals called");
 
 
 //after file system called, filesystem call back get the file system result and open/create the file
 //getfilecallback create a file with the 
 function getFileCallback(fileEntry){
-    // console.log("getFileCallback called");
+    console.log("getFileCallback called");
 
-    var textInsert = document.getElementById('yourText').value;
-    var dataObj = new Blob([textInsert], { type: 'text/plain' });
+    // var textInsert = document.getElementById('yourText').value;
+    var dataObj = new Blob([neighbor], { type: 'text/plain' });
     // Now decide what to do
     // Write to the file
     writeFile(fileEntry, dataObj);
@@ -479,7 +502,8 @@ function getFileCallback(fileEntry){
 
 // Let's write some files
 function writeFile(fileEntry, dataObj) {
-    // console.log("writeFile called");
+    console.log("writeFile called");
+    console.log(neighbor + "neighbor");
 
     // Create a FileWriter object for our FileEntry (log.txt).
     fileEntry.createWriter(function (fileWriter) {
@@ -487,17 +511,17 @@ function writeFile(fileEntry, dataObj) {
         // If data object is not passed in,
         // create a new Blob instead.
         if (!dataObj) {
-            dataObj = new Blob(['Hello, worked second chance'], { type: 'text/plain' });
+            dataObj = new Blob([neighbor], { type: 'text/plain' });
         }
 
         fileWriter.write(dataObj);
 
         fileWriter.onwriteend = function() {
-            // console.log("Successful file write...");
+            console.log("Successful file write...");
         };
 
         fileWriter.onerror = function (e) {
-            // console.log("Failed file write: " + e.toString());
+            console.log("Failed file write: " + e.toString());
         };
 
     });
@@ -505,7 +529,7 @@ function writeFile(fileEntry, dataObj) {
 var varFile;
 // Let's read some files
 function readFile(fileEntry) {
-    // console.log("readFile called");
+    console.log("readFile called");
 
     // Get the file from the file entry
     fileEntry.file(function (file) {
@@ -515,13 +539,19 @@ function readFile(fileEntry) {
         reader.readAsText(file);
 
         reader.onloadend = function() {
-            // console.log("Successful file read: " + this.result);
+            console.log("Successful file read: " + this.result);
             varFile = this.result;
-            // console.log("file path: " + fileEntry.fullPath);
+            console.log("file path: " + fileEntry.fullPath);
         };
 
     }, onError);
 }
+
+function tryinganother(){
+    console.log(varFile);
+}
+
+
 
  var timeSunrise;
  var timeSunset;
