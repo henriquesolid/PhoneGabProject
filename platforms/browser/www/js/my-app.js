@@ -13,7 +13,7 @@ var mainView = myApp.addView('.view-main', {
 
 // Handle Cordova Device Ready Event
 $$(document).on('deviceready', function() {
-    // // console.log("Device is ready!");
+    // console.log("Device is ready!");
     //start watch is for the device motion
     startWatch();    
     getLocation();
@@ -45,8 +45,16 @@ $$(document).on('pageInit', '.page[data-page="about"]', function (e) {
     // Following code will be executed for page with data-page attribute equal to "about"
     myApp.alert('Here comes About page');
 })
+function pics(){
+    navigator.camera.getPicture(cameraCallback, onError);
+}
+function cameraCallback(imageData){
+    var image = document.getElementById('myImage');
+    image.src = imageData;
 
+    // image.src = "data:image/jpeg;base64," + imageData;
 
+}
 
 // starting device accelaration/motion
 
@@ -58,7 +66,7 @@ function startWatch(){
     // Notice that the function takes two callbacks (accCallback and onError) and
     // a JSON object (options)
     watchID = navigator.accelerometer.watchAcceleration(accCallback, onError, options); 
-    // // console.log("startwatch function started");
+    // console.log("startwatch function started");
 
 }
 
@@ -228,7 +236,6 @@ function displayWeather(){
          sunrise =  responseJSONWeather.sys.sunrise;
          sunset =  responseJSONWeather.sys.sunset;
          countryCode = responseJSONWeather.sys.country;
-        //  console.log(countryCode + " countryCode");
 
 
         document.getElementById('condition').innerHTML = condition; 
@@ -269,19 +276,17 @@ function weatherMore(){
 
 //function to print the flag
 function printFlag(){
-//    console.log("printFlag called");
+// console.log("printFlag called");
 
 
 //change the countrycode to lowercase to use it in the URL to the the flag
    countryCode = countryCode.toLowerCase();
 
-//    <div class="container text-center"> <img class="img-fluid rounded-circle" src="img/user.png">
-// document.getElementById('flag').write("<img src='http://flags.fmcdn.net/data/flags/w580/ie.png'>");
-var flagUrl = document.getElementById('flag').src="http://flags.fmcdn.net/data/flags/w580/" + countryCode + ".png";
-// document.getElementById('flag').value="100";
-// var test = document.getElementById('flag').value;
-// console.log(test + " must be 100");
+// document.getElementById("myDiv").style.backgroundImage = "url('img_tree.png')";
+// document.getElementById('flag').style.backgroundImage = "url('http://flags.fmcdn.net/data/flags/w580/" + countryCode + ".png";
 
+var flagUrl = document.getElementById('flag').src="http://flags.fmcdn.net/data/flags/w580/" + countryCode + ".png";
+// console.log(flagUrl);
 }
 
 // currency below
@@ -465,14 +470,14 @@ function shake(){
 }
 
 function tryingFile(){
-    console.log("tryingFile called");
+    // console.log("tryingFile called");
 //get access to file system
     window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, fileSystemCallback, onError
     );
 }
 
 function fileSystemCallback(fs){
-    console.log("fileSystemCallback called");
+    // console.log("fileSystemCallback called");
 
     // Name of the file I want to create
     var fileToCreate = "filewithneighbors.txt";
@@ -482,13 +487,11 @@ function fileSystemCallback(fs){
 }
 
 var fileSystemOptionals = { create: true, exclusive: false };
-console.log("fileSystemOptionals called");
-
 
 //after file system called, filesystem call back get the file system result and open/create the file
 //getfilecallback create a file with the 
 function getFileCallback(fileEntry){
-    console.log("getFileCallback called");
+    // console.log("getFileCallback called");
 
     // var textInsert = document.getElementById('yourText').value;
     var dataObj = new Blob([neighbor], { type: 'text/plain' });
@@ -502,8 +505,8 @@ function getFileCallback(fileEntry){
 
 // Let's write some files
 function writeFile(fileEntry, dataObj) {
-    console.log("writeFile called");
-    console.log(neighbor + "neighbor");
+    // console.log("writeFile called");
+    // console.log(neighbor + "neighbor");
 
     // Create a FileWriter object for our FileEntry (log.txt).
     fileEntry.createWriter(function (fileWriter) {
@@ -517,11 +520,11 @@ function writeFile(fileEntry, dataObj) {
         fileWriter.write(dataObj);
 
         fileWriter.onwriteend = function() {
-            console.log("Successful file write...");
+            // console.log("Successful file write...");
         };
 
         fileWriter.onerror = function (e) {
-            console.log("Failed file write: " + e.toString());
+            // console.log("Failed file write: " + e.toString());
         };
 
     });
@@ -529,7 +532,7 @@ function writeFile(fileEntry, dataObj) {
 var varFile;
 // Let's read some files
 function readFile(fileEntry) {
-    console.log("readFile called");
+    // console.log("readFile called");
 
     // Get the file from the file entry
     fileEntry.file(function (file) {
@@ -539,16 +542,16 @@ function readFile(fileEntry) {
         reader.readAsText(file);
 
         reader.onloadend = function() {
-            console.log("Successful file read: " + this.result);
+            // console.log("Successful file read: " + this.result);
             varFile = this.result;
-            console.log("file path: " + fileEntry.fullPath);
+            // console.log("file path: " + fileEntry.fullPath);
         };
 
     }, onError);
 }
 
 function tryinganother(){
-    console.log(varFile);
+    // console.log(varFile);
 }
 
 
@@ -597,19 +600,16 @@ function tryinganother(){
 //   var sunsetResponse;
 //   // timestamp converter for weather
 //   function timeStampConverter(){
-//       // console.log("timeStampConverter called");
-//       // console.log(sunset + " sunset");
+
 //        //store in a variable the http request
 //        var http = new XMLHttpRequest();    
 //        //https://helloacm.com/api/unix-timestamp-converter/?cached&s=1553667088
    
   
-//        // console.log(sunset + " translateThis");
 //        //create a variable with the URL that has the JSON
 //        const url = "https://helloacm.com/api/unix-timestamp-converter/?cached&s=" + sunset;
 //        //const url = 'https://helloacm.com/api/unix-timestamp-converter/?cached&s=1553667088';
   
-//        // console.log(url);
 //      //GET THE INFORMATION
 //        http.open("GET", url);
 //        http.send();
@@ -632,8 +632,8 @@ function tryinganother(){
 //    }
    
 function onError(msg){
-    console.log("onError called");
-    console.log(msg);
+    // console.log("onError called");
+    // console.log(msg);
 }
 
 function todayDate(){

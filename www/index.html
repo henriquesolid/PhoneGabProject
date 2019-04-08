@@ -96,14 +96,19 @@
                     
                         <!-- element card at below div gives the white background -->
                         <div> 
-                          <input type="text" id="yourText"></input>
-                          <button onclick=tryingFile()>tryingFile</button>
-                          <button onclick=tryinganother()>tryinganother</button>
+                          <button id="buttonPic" onclick="pics()">Picture</button>
+                          <img id="myImage" height="50%" width="50%">img</img>
+                          <!-- annoying audio -->
+                          <!-- <audio src="./music/track01.mp3" controls autoplay>
+                          <p>If you are reading this, it is because your browser does not support the audio element.</p>
+                          </audio> -->
                       </div>
                         <!-- <div class="content-block"> -->
                             <header id="page-header">
                                 <div class="jumbotron jumbotron-fluid bg-light">
-                                  <div class="container text-center"> <img class="img-fluid rounded-circle" id="flag">
+                                  <div class="container text-center">
+                                     <!-- <img class="img-fluid rounded-circle img-thumbnail" id="flag"> -->
+                                     <img class="ratio img-responsive" id="flag"></img>
                                     <h2 id="welcome">Welcome...</h2>
                                     <p class="lead">Here you will find priceless information about this country.</p>
                                     <f id="timeNow">Loading date...</f><br>
