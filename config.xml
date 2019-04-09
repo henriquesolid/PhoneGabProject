@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.phonegap.helloworld" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>SecondApp</name>
+    <name>TravellerHelper</name>
     <description>
         A basic Framework7 template for PhoneGap.
     </description>
@@ -28,10 +28,5 @@
     <plugin name="cordova-plugin-whitelist" spec="~1.2.0" />
     <plugin name="cordova-plugin-console" spec="~1.0.1" />
     <plugin name="cordova-plugin-statusbar" spec="~1.0.1" />
-    <plugin name="cordova-plugin-device-motion" spec="~2.0.1" />
-    <plugin name="cordova-plugin-vibration" spec="~3.1.0" />
-    <plugin name="cordova-plugin-geolocation" spec="~4.0.1" />
-    <plugin name="cordova-plugin-networkinterface" source="npm" />
-    <plugin name="cordova-plugin-file" spec="~6.0.1" />
-    <plugin name="cordova-plugin-camera" spec="~4.0.3" />
+    <engine name="browser" spec="~5.0.4" />
 </widget>

@@ -1,8 +1,8 @@
 {
   "background_color": "#FFF",
   "display": "standalone",
-  "name": "SecondApp",
-  "short_name": "SecondApp",
+  "name": "TravellerHelper",
+  "short_name": "TravellerHelper",
   "version": "com.phonegap.helloworld",
   "description": "A basic Framework7 template for PhoneGap.",
   "author": "Apache Cordova Team",

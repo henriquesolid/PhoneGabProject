@@ -38,9 +38,6 @@
     
     <!-- Custom CSS styles -->
     <link rel="stylesheet" href="css/styles.css">
-
-
-    
 </head>
 
 <body>
@@ -48,13 +45,12 @@
     <div class="statusbar-overlay"></div>
 
     <!-- Panels overlay-->
-    <div class="panel-overlay">panel </div>
+    <div class="panel-overlay"></div>
     <!-- Left panel with reveal effect-->
     <div class="panel panel-right panel-reveal">
         <div class="content-block">
             <p>Visited places</p>
 
-            <div id="hello"></div>
 
 
 
@@ -70,58 +66,54 @@
         <div class="view view-main">
           
             <!-- Top Navbar-->
-            <div class="navbar">
-                Traveller Helper!
+            <div class="navbar" >
+                Traveller Helper
+
                 <div class="navbar-inner">
-              
+
                     <!-- We need cool sliding animation on title element, so we have additional "sliding" class -->
-                    <div class="right">
+                    <div class="right">              
                         <!--
                           Right link contains only icon - additional "icon-only" class
                           Additional "open-panel" class tells app to open panel when we click on this link
                         -->
-                        <a href="#" class="link icon-only open-panel"><i class="icon icon-bars"></i></a>
+                        <a href="#" class="icon icon-only open-panel">
+                            <img src="img/logo.svg" alt="" width="30" height="30">              
+                          </a>
                     </div>
                 </div>
             </div>
             <!-- Pages container, because we use fixed-through navbar and toolbar, it has additional appropriate classes-->
             <div class="pages navbar-through toolbar-through">
                 <!-- Page, "data-page" contains page name -->
-                Traveller Helper!
                 <div data-page="index" class="page">
-
-
                     <!-- Scrollable page content -->
                     <div class="page-content ">
-                    
-                        <!-- element card at below div gives the white background -->
-                        <div> 
-                          <button id="buttonPic" onclick="pics()">Picture</button>
-                          <img id="myImage" height="50%" width="50%">img</img>
-                          <!-- annoying audio -->
+
+                       <!-- annoying audio -->
                           <!-- <audio src="./music/track01.mp3" controls autoplay>
                           <p>If you are reading this, it is because your browser does not support the audio element.</p>
                           </audio> -->
-                      </div>
+                    
+                        <!-- element card at below div gives the white background -->
+                        
                         <!-- <div class="content-block"> -->
                             <header id="page-header">
                                 <div class="jumbotron jumbotron-fluid bg-light">
                                   <div class="container text-center">
-                                     <!-- <img class="img-fluid rounded-circle img-thumbnail" id="flag"> -->
                                      <img class="ratio img-responsive" id="flag"></img>
                                     <h2 id="welcome">Welcome...</h2>
                                     <p class="lead">Here you will find priceless information about this country.</p>
-                                    <f id="timeNow">Loading date...</f><br>
                                     <!-- <a class="btn social-icons" href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a> <a class="btn social-icons" href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a> <a class="btn social-icons" href="#"><i class="fa fa-behance" aria-hidden="true"></i></a> <a class="btn social-icons" href="#"><i class="fa fa-500px" aria-hidden="true"></i></a> <a class="btn social-icons" href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a>  -->
                                   </div>
                                 </div>
                               </header>
-                              <section class="bg-white">
+                              <section class="">
                                 <div class="container">
                                   <div class="row">
-                                    <div class="col-12 text-center">
-                                      <h3 class="section-title"></h3>
-                                    </div>
+                                      <div class="col-12 text-center">
+                                        <h4 class="section-title" id="timeNow"></h4>
+                                      </div>
                                   </div>
 
                                   <div class="row">
@@ -131,46 +123,44 @@
                                           <h5 class="card-title" id="temperature">Loading temperature</h5>
                                           <p class="card-text">Currenty weather in <f id="neighbor">loading neighbor </f>.</p>
                                           <p>Condition: <f id="condition">Loading condition</f></p>
-                                          <!-- <a onclick="weatherMore();this.onclick=null;" href="" class="btn btn-primary btn-sm">Read more</a> -->
                                          
-                                          <!-- div for detailed information about weather -->
-                                <div>   
-                                  <div class="row"> 
-                                    <div class="col">Maximum:</div> 
-                                    <div class="col" id="temp_max">maximum temperature</div> 
-                                  </div>
-                                  
-                                  <div class="row">
-                                      <div class="col">Minimum:</div>
-                                      <div class="col" id="temp_min">minimum temperature</div> 
-                                  </div> 
-                                  
-                                  <div class="row"> 
-                                    <div class="col">Windy:</div> 
-                                    <div class="col" id="windspeed">wind speed</div> 
-                                  </div> 
-                                  
-                                  <div class="row"> 
-                                    <div class="col">Humidity:</div> 
-                                    <div class="col" id="humidity">humidity</div> 
-                                  </div> 
-                                  
-                                  <div class="row"> 
-                                    <div class="col">Pressure:</div> 
-                                    <div class="col" id="pressure">pressure</div> 
-                                  </div>
+                                                              <div>   
+                                                                  <div class="row"> 
+                                                                    <div class="col">Maximum:</div> 
+                                                                    <div class="col" id="temp_max">maximum temperature</div> 
+                                                                  </div>
+                                                                
+                                                                  <div class="row">
+                                                                      <div class="col">Minimum:</div>
+                                                                      <div class="col" id="temp_min">minimum temperature</div> 
+                                                                  </div> 
+                                                                
+                                                                  <div class="row"> 
+                                                                    <div class="col">Windy:</div> 
+                                                                    <div class="col" id="windspeed">wind speed</div> 
+                                                                  </div> 
+                                                                
+                                                                  <div class="row"> 
+                                                                    <div class="col">Humidity:</div> 
+                                                                    <div class="col" id="humidity">humidity</div> 
+                                                                  </div> 
+                                                                
+                                                                  <div class="row"> 
+                                                                    <div class="col">Pressure:</div> 
+                                                                    <div class="col" id="pressure">pressure</div> 
+                                                                  </div>
 
-                                  <div class="row"> 
-                                      <div class="col">Sunrise:</div> 
-                                      <div class="col" id="sunriseDIV">sunrise</div> 
-                                  </div>
+                                                                  <div class="row"> 
+                                                                      <div class="col">Sunrise:</div> 
+                                                                      <div class="col" id="sunriseDIV">sunrise</div> 
+                                                                  </div>
 
-                                  <div class="row"> 
-                                        <div class="col">Sunset:</div> 
-                                        <div class="col" id="sunsetDIV">Sunset</div> 
-                                  </div>
-                                </div>   
-                                          
+                                                                  <div class="row"> 
+                                                                        <div class="col">Sunset:</div> 
+                                                                        <div class="col" id="sunsetDIV">Sunset</div> 
+                                                                  </div>
+                                                              </div>   
+                                                                        
                                         </div>
                                       </div>
                                     </div>
@@ -188,30 +178,47 @@
                                     <div class="col-12 col-sm-6 col-md-4">
                                       <div class="card"> <img class="card-img-top" src="img/3.jpg" alt="Card image cap">
                                         <div class="card-body">
-                                          <h5 class="card-title">Currency converter:</h5>
-                                          <p class="card-text"><F id="localCurrency">loading local currency</F>
-                                                  <div class="item-inner">
+                                          <h5 class="card-title">Currency converter</h5>
+                                          <p class="card-text" id="localCurrency">loading local currency</p>
+                                                  <div class="container">
+
                                                       <div class="row">
                                                             <div class="col">
-                                                              <input oninput="calcT()" onchange="calcT()" type="number" min="1" max="9999999" id="AmmountMoney" class="" pattern= "[0-9]+">
+                                                              <input oninput="calcT()" onchange="calcT()" type="number" min="1" max="9999999" id="AmmountToConvert" class="form-control form-control-sm" pattern= "[0-9]+">
                                                             </div>
                                                             
-                                                            <div class="col item-inner">
-                                                                  <select oninput="calcT()" onchange="calcT()" id="FromCurrencySelection">
+                                                            <div class="col">
+                                                                  <select oninput="calcT()" onchange="calcT()" id="FromCurrency" class="form-control form-control-sm">
                                                                       <option value="Dollar">United States Dollar</option>
-                                                                      <option value="Reais">Brazilian Real</option>
-                                                                      <option value="Pound">Pound sterling</option>
                                                                       <option value="Euro">Euro</option>
+                                                                      <option value="Pound">Pound sterling</option>
+                                                                      <option value="Reais">Brazilian Real</option>
                                                                       <option value="Yen">Japanese Yen</option>
                                                                       <option value="Won">South Korean won</option>
                                                                   </select>
                                                             </div>
-                                                      </div><br>
+                                                            
+                                                      </div>
 
-                                                            <div id="divSelectionOfCurrency">loading second currency selection</div>  
+                                                      <div class='row'> 
+                                                        <div class='col'> 
+                                                          <input type='number' id='numberTwo' class='form-control form-control-sm' disabled>
+                                                        </div>
+                                                        
+                                                        <div class='col'>
+                                                          <select oninput='calcT()' onchange='calcT()' id='ToCurrency' class='form-control'>
+                                                            <option value='' id="exchangeLocal">Loading local currency</option>
+                                                            <option value='Dollar'>United States Dollar</option>   
+                                                            <option value='Euro'>Euro</option> 
+                                                            <option value='Pound'>Pound sterling</option> 
+                                                            <option value='Reais'>Brazilian Real</option> 
+                                                            <option value='Yen'>Japanese Yen</option> 
+                                                            <option value='Won'>South Korean won</option> 
+                                                          </select> 
+                                                        </div>
+                                                      </div>
                                                   </div>
-                                           </p>
-                                          <!-- <a href="#" class="btn btn-primary btn-sm">See Details</a>  -->
+                                                  <div id="currencyNotSupported"></div>
                                         </div>
                                       </div>
                                     </div>
@@ -221,19 +228,41 @@
                                       <div class="card"> <img class="card-img-top" src="img/map.jpg" alt="Card image cap">
                                         <div class="card-body">
                                           <h5 class="card-title">Map of the city!</h5>
-                                          <p class="card-text" id="map">Project description goes here ...</p>
-                                          <a href="#" class="btn btn-primary btn-sm" onclick="refreshMap()">See your location!</a> </div>
+                                          <div class="card-body" id="map">Project description goes here ...</div><br>
+                                          <button href="#" class="button button-round button-fill" onclick="refreshMap()">See your location!</button>
+                                        </div>
                                       </div>
                                     </div>
                                     
                                     <div class="col-12 col-sm-6 col-md-4">
                                         <div class="card"> <img class="card-img-top" src="img/4.jpg" alt="Card image cap">
                                           <div class="card-body">
-                                            <h5 class="card-title">Project title</h5>
-                                            <p class="card-text">Project description goes here ...</p>
-                                            <a href="#" class="btn btn-primary btn-sm">See Details</a> </div>
+                                            <h5 class="card-title">Take a picture!</h5>
+                                            <p class="card-text">Record this moment with a picture...</p>
+                                            <button onclick="pics()" class="button button-round button-fill">Take Picture</button>
+                                            <button onclick="openCamera()" class="button button-round button-fill">Open Camera</button>
+                                            <img id="myImage" height="50%" width="50%"></img>  
+                                          </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-sm-6 col-md-4">
+                                        <div class="card"> 
+                                          <!-- <img class="card-img-top" src="img/5.jpg" alt="Card image cap"> -->
+                                          <div class="card-body">
+                                            <!-- <h5 class="card-title">Project title</h5> -->
+                                            <p class="card-text">
+                                                <button onclick="shake()" class="button button-round button-fill"> Shake it! </button>
+                                              </p>
+                                              <!-- <a href="#" class="btn btn-primary btn-sm">See Details</a> </div> -->
+
+                                              <a id="phoneCall" style="text-align:center;border:1px"> Loading country code </a>
+
                                         </div>
                                       </div>
+
+                                      
+
 
                                     <!-- default -->
                                     <!-- <div class="col-12 col-sm-6 col-md-4">
@@ -246,19 +275,11 @@
                                       </div> -->
                                       <!-- end default -->
 
-
+                                      
                                   </div>
                                 </div>
                               </section>
-  
-    <!-- <p id="accelerometer">Loading accelerometer</p> -->
-                            <!-- <button onclick="home()"> See home address!! </button> -->
-                            
-                            <button onclick="shake()" class="button button-round button-fill">Shake it! </button>
 
-        <div id="phoneCall">Loading country code</div>
-                            <!-- Link to another page -->
-                            <!-- <a href="about.html">About app</a> -->
                         </div>
                     </div>
                 </div>
@@ -269,12 +290,27 @@
 
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="lib/framework7/js/framework7.min.js"></script>
-    <script type="text/javascript" src="js/my-app.js"></script>
+    <script type="text/javascript" src="js/my-app.js"></script> <!--  personal script -->
+    <script type="text/javascript" src="js/date.js"></script> <!--  date javascript -->
+    <script type="text/javascript" src="js/cameraFunction.js"></script>  
+    <script type="text/javascript" src="js/createFileFunction.js"></script>  
+    <script type="text/javascript" src="js/exchangeMoney.js"></script>  
+    <script type="text/javascript" src="js/WeatherDisplay.js"></script>  
+    <script type="text/javascript" src="js/airportCall.js"></script>  
+
+
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 
-    <script src="phonegap.js"></script>
-    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyApFPNQ2WxbEueUXMJBPHjLenlPnFo68ls&callback=initMap"></script> -->
+    <!-- <script src="phonegap.js"></script> -->
+
+          <!-- script for google maps -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyApFPNQ2WxbEueUXMJBPHjLenlPnFo68ls"></script>
+
+    
+<!-- 
+    <script type="text/javascript">
+      app.initialize();
+    </script> -->
 
 </body>
 </html>

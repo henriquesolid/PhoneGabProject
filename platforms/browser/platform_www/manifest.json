@@ -1,6 +1,6 @@
 {
-  "name": "SecondApp",
-  "short_name": "SecondApp",
+  "name": "TravellerHelper",
+  "short_name": "TravellerHelper",
   "description": "Description of your app from template",
   "start_url": "index.html",
   "scope": "index.html",

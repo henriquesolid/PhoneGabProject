@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--
+        Customize this policy to fit your own app's needs. For more guidance, see:
+            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+        Some notes:
+            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+                * Enable inline JS: add 'unsafe-inline' to default-src
+        -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
+
+    <!-- Required meta tags-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+
+    <!-- Your app title -->
+    <title>My App</title>
+
+    <link rel="stylesheet" href="lib/framework7/css/framework7.ios.min.css">
+    <link rel="stylesheet" href="lib/framework7/css/framework7.ios.colors.min.css">
+
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <!-- Status bar overlay for full screen mode (PhoneGap) -->
+    <div class="statusbar-overlay"></div>
+
+    <!-- Panels overlay-->
+    <div class="panel-overlay"></div>
+    <!-- Left panel with reveal effect-->
+    <div class="panel panel-right panel-reveal">
+        <div class="content-block">
+            <p>right panel content goes here</p>
+        </div>
+    </div>
+
+    <!-- Views -->
+    <div class="views">
+        <!-- Your main view, should have "view-main" class -->
+        <div class="view view-main">
+            <!-- Top Navbar-->
+            <div class="navbar">
+                <div class="navbar-inner">
+                    <!-- We need cool sliding animation on title element, so we have additional "sliding" class -->
+                    <div class="center sliding">Awesome App</div>
+                    <div class="left">
+                        <!--
+                          Right link contains only icon - additional "icon-only" class
+                          Additional "open-panel" class tells app to open panel when we click on this link
+                        -->
+                        <a href="#" class="link icon-only open-panel"><i class="icon icon-bars"></i></a>
+                    </div>
+                </div>
+            </div>
+            <!-- Pages container, because we use fixed-through navbar and toolbar, it has additional appropriate classes-->
+            <div class="pages navbar-through toolbar-through">
+                <!-- Page, "data-page" contains page name -->
+                <div data-page="index" class="page">
+                    <!-- Scrollable page content -->
+                    <div class="page-content">
+                        <div class="content-block">
+
+                            <div class="content-block">
+                                <header id="page-header">
+                                    <div class="jumbotron jumbotron-fluid bg-light">
+                                      <div class="container text-center">
+                                         <!-- <img class="img-fluid rounded-circle img-thumbnail" id="flag"> -->
+                                         <img class="ratio img-responsive" id="flag"></img>
+                                        <h2 id="welcome">Welcome...</h2>
+                                        <p class="lead">Here you will find priceless information about this country.</p>
+                                        <f id="timeNow">Loading date...</f><br>
+                                        <!-- <a class="btn social-icons" href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a> <a class="btn social-icons" href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a> <a class="btn social-icons" href="#"><i class="fa fa-behance" aria-hidden="true"></i></a> <a class="btn social-icons" href="#"><i class="fa fa-500px" aria-hidden="true"></i></a> <a class="btn social-icons" href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a>  -->
+                                      </div>
+                                    </div>
+                                  </header>
+                                  <section class="bg-white">
+                                    <div class="container">
+                                      <div class="row">
+                                        <div class="col-12 text-center">
+                                          <h3 class="section-title"></h3>
+                                        </div>
+                                      </div>
+    
+                                      <div class="row">
+                                        <div class="col-12 col-sm-6 col-md-4">
+                                          <div class="card"> <img class="card-img-top" src="img/1.jpg" alt="Card image cap">
+                                            <div class="card-body">
+                                              <h5 class="card-title" id="temperature">Loading temperature</h5>
+                                              <p class="card-text">Currenty weather in <f id="neighbor">loading neighbor </f>.</p>
+                                              <p>Condition: <f id="condition">Loading condition</f></p>
+                                             
+                                    <div>   
+                                      <div class="row"> 
+                                        <div class="col">Maximum:</div> 
+                                        <div class="col" id="temp_max">maximum temperature</div> 
+                                      </div>
+                                      
+                                      <div class="row">
+                                          <div class="col">Minimum:</div>
+                                          <div class="col" id="temp_min">minimum temperature</div> 
+                                      </div> 
+                                      
+                                      <div class="row"> 
+                                        <div class="col">Windy:</div> 
+                                        <div class="col" id="windspeed">wind speed</div> 
+                                      </div> 
+                                      
+                                      <div class="row"> 
+                                        <div class="col">Humidity:</div> 
+                                        <div class="col" id="humidity">humidity</div> 
+                                      </div> 
+                                      
+                                      <div class="row"> 
+                                        <div class="col">Pressure:</div> 
+                                        <div class="col" id="pressure">pressure</div> 
+                                      </div>
+    
+                                      <div class="row"> 
+                                          <div class="col">Sunrise:</div> 
+                                          <div class="col" id="sunriseDIV">sunrise</div> 
+                                      </div>
+    
+                                      <div class="row"> 
+                                            <div class="col">Sunset:</div> 
+                                            <div class="col" id="sunsetDIV">Sunset</div> 
+                                      </div>
+                                    </div>   
+                                              
+                                            </div>
+                                          </div>
+                                        </div>
+    
+                                        <div class="col-12 col-sm-6 col-md-4">
+                                          <div class="card"> <img class="card-img-top" src="img/airport.jpg" alt="Card image cap">
+                                            <div class="card-body">
+                                              <h5 class="card-title">Airport</h5>
+                                              <p class="card-text" id="airport">Loadig nearest airport...</p>
+                                              <!-- <a href="#" class="btn btn-primary btn-sm">See Details</a>  -->
+                                            </div>
+                                          </div>
+                                        </div>
+                                        
+                                        <div class="col-12 col-sm-6 col-md-4">
+                                          <div class="card"> <img class="card-img-top" src="img/3.jpg" alt="Card image cap">
+                                            <div class="card-body">
+                                              <h5 class="card-title">Currency converter:</h5>
+                                              <p class="card-text"><F id="localCurrency">loading local currency</F>
+                                                      <div class="item-inner">
+                                                          <div class="row">
+                                                                <div class="col">
+                                                                  <input oninput="calcT()" onchange="calcT()" type="number" min="1" max="9999999" id="AmmountMoney" class="" pattern= "[0-9]+">
+                                                                </div>
+                                                                
+                                                                <div class="col item-inner">
+                                                                      <select oninput="calcT()" onchange="calcT()" id="FromCurrencySelection">
+                                                                          <option value="Dollar">United States Dollar</option>
+                                                                          <option value="Reais">Brazilian Real</option>
+                                                                          <option value="Pound">Pound sterling</option>
+                                                                          <option value="Euro">Euro</option>
+                                                                          <option value="Yen">Japanese Yen</option>
+                                                                          <option value="Won">South Korean won</option>
+                                                                      </select>
+                                                                </div>
+                                                          </div><br>
+    
+                                                                <div id="divSelectionOfCurrency">loading second currency selection</div>  
+                                                      </div>
+                                               </p>
+                                              <!-- <a href="#" class="btn btn-primary btn-sm">See Details</a>  -->
+                                            </div>
+                                          </div>
+                                        </div>
+                                        
+    
+                                        <div class="col-12 col-sm-6 col-md-4">
+                                          <div class="card"> <img class="card-img-top" src="img/map.jpg" alt="Card image cap">
+                                            <div class="card-body">
+                                              <h5 class="card-title">Map of the city!</h5>
+                                              <p class="card-text" id="map">Project description goes here ...</p>
+                                              <a href="#" class="btn btn-primary btn-sm" onclick="refreshMap()">See your location!</a> </div>
+                                          </div>
+                                        </div>
+                                        
+                                        <div class="col-12 col-sm-6 col-md-4">
+                                            <div class="card"> <img class="card-img-top" src="img/4.jpg" alt="Card image cap">
+                                              <div class="card-body">
+                                                <h5 class="card-title">Take a picture!</h5>
+                                                <p class="card-text">Record this moment with a picture...</p>
+                                                <button onclick="pics()">Take Picture</button>
+                                                <button onclick="openCamera()">Open Camera</button>
+                                                <img id="myImage" height="50%" width="50%"></img>  
+    
+                                                <!-- <a href="#" class="btn btn-primary btn-sm">See Details</a> </div> -->
+                                            </div>
+                                          </div>
+    
+                                          
+                                             
+    
+                                        <!-- default -->
+                                        <!-- <div class="col-12 col-sm-6 col-md-4">
+                                            <div class="card"> <img class="card-img-top" src="img/4.jpg" alt="Card image cap">
+                                              <div class="card-body">
+                                                <h5 class="card-title">Project title</h5>
+                                                <p class="card-text">Project description goes here ...</p>
+                                                <a href="#" class="btn btn-primary btn-sm">See Details</a> </div>
+                                            </div>
+                                          </div> -->
+                                          <!-- end default -->
+    
+    
+                                      </div>
+    
+    
+    
+                                            <!-- <p id="accelerometer">Loading accelerometer</p> -->
+    
+    
+                                            <div class="card">      
+                                                <button onclick="shake()" class="button button-round button-fill"> Shake it! </button>
+                                              </div>
+    
+                                              <div id="phoneCall" style="text-align:center;border:1px">
+                                                Loading country code
+                                              </div>
+    
+                                    </div>
+                                  </section>
+    
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            
+            <!-- Bottom Toolbar-->
+            <div class="toolbar">
+                <div class="toolbar-inner">
+                    <!-- Toolbar links -->
+                    <a href="#" class="link">Link 1</a>
+                    <a href="#" class="link">Link 2</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="lib/framework7/js/framework7.min.js"></script>
+    <script type="text/javascript" src="js/my-app.js"></script> <!--  personal script -->
+    <script type="text/javascript" src="js/date.js"></script> <!--  date javascript -->
+    <script type="text/javascript" src="js/cameraFunction.js"></script>  
+    <script type="text/javascript" src="js/createFileFunction.js"></script>  
+    <script type="text/javascript" src="js/exchangeMoney.js"></script>  
+    <script type="text/javascript" src="js/WeatherDisplay.js"></script>  
+    <script type="text/javascript" src="js/airportCall.js"></script>  
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+    <!-- script for google maps -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyApFPNQ2WxbEueUXMJBPHjLenlPnFo68ls"></script>
+
+</body>
+</html>

@@ -13,28 +13,12 @@
     "cordova-plugin-file": {
       "PACKAGE_NAME": "com.phonegap.helloworld"
     },
-    "cordova-plugin-networkinterface": {
-      "PACKAGE_NAME": "com.phonegap.helloworld"
-    },
     "cordova-plugin-statusbar": {
       "PACKAGE_NAME": "com.phonegap.helloworld"
     },
     "cordova-plugin-whitelist": {
       "PACKAGE_NAME": "com.phonegap.helloworld"
-    },
-    "cordova-plugin-camera": {
-      "PACKAGE_NAME": "com.phonegap.helloworld"
     }
   },
-  "dependent_plugins": {
-    "cordova-plugin-device-motion": {
-      "PACKAGE_NAME": "com.phonegap.helloworld"
-    },
-    "cordova-plugin-geolocation": {
-      "PACKAGE_NAME": "com.phonegap.helloworld"
-    },
-    "cordova-plugin-vibration": {
-      "PACKAGE_NAME": "com.phonegap.helloworld"
-    }
-  }
+  "dependent_plugins": {}
 }
