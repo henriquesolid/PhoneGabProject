@@ -15,7 +15,7 @@ var mainView = myApp.addView('.view-main', {
 $$(document).on('deviceready', function() {
     console.log("Device is ready!");
     getLocation();
-
+    CreateFileFunction();
 });
 
 
@@ -43,6 +43,36 @@ $$(document).on('pageInit', '.page[data-page="about"]', function (e) {
     // Following code will be executed for page with data-page attribute equal to "about"
     myApp.alert('Here comes About page');
 })
+
+
+
+
+//***********start device diagnotiscs */
+
+function vamosver(){
+
+    var today = new Date().toLocaleDateString('ko-KR', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+    })
+    console.log(today);
+
+}
+
+//***********finish device diagnotiscs */
+
+
+
+
+
+
+
+
+
+
 
 
 // // starting device accelaration/motion
@@ -89,10 +119,11 @@ var lat;
 var lon;
 function geoCallback(position){
      // console.log("geoCallback called");
-    lat =   position.coords.latitude; //latitude vital for the app
+    // lat =   position.coords.latitude; //latitude vital for the app
+    lat = -13.163068;
+    // lon =  position.coords.longitude; //longitude vital for the app
+    lon = -72.545128;
 
-    lon =  position.coords.longitude; //longitude vital for the app
-    
     opencageAPI();  //get city, country and more
     displayWeather(); //file WeatherDisplay.js
     nearestAirport(); //file airportcall.js
@@ -144,6 +175,7 @@ function opencageAPI(){
     var http = new XMLHttpRequest();
     // const url = 'https://api.opencagedata.com/geocode/v1/json?q=53.3458+-6.2575&key=9614ccc2a3db467aa291f7aaea02676c';
     const url = 'https://api.opencagedata.com/geocode/v1/json?q='+lat+'+'+lon+'&key=9614ccc2a3db467aa291f7aaea02676c';
+    console.log(url);
     http.open("GET", url);
 
     http.onreadystatechange = function () {
@@ -151,6 +183,7 @@ function opencageAPI(){
             
         var response = http.responseText;
         var responseJSON = JSON.parse(response);
+        console.log(responseJSON);
 
         var city =  responseJSON.results[0].components.city;
         var country =  responseJSON.results[0].components.country;

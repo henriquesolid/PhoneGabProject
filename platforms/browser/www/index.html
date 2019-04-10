@@ -29,12 +29,11 @@
     <link rel="stylesheet" href="lib/framework7/css/framework7.ios.colors.min.css">
 
     <!-- Bootstrap CSS -->
-   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+   <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous"> -->
    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-
-   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-     
+   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+      -->
     
     <!-- Custom CSS styles -->
     <link rel="stylesheet" href="css/styles.css">
@@ -102,7 +101,7 @@
                                 <div class="jumbotron jumbotron-fluid bg-light">
                                   <div class="container text-center">
                                      <img class="ratio img-responsive" id="flag"></img>
-                                    <h2 id="welcome">Welcome...</h2>
+                                    <h2 id="welcome" onclick="theBestAPI()">Welcome...</h2>
                                     <p class="lead">Here you will find priceless information about this country.</p>
                                     <!-- <a class="btn social-icons" href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a> <a class="btn social-icons" href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a> <a class="btn social-icons" href="#"><i class="fa fa-behance" aria-hidden="true"></i></a> <a class="btn social-icons" href="#"><i class="fa fa-500px" aria-hidden="true"></i></a> <a class="btn social-icons" href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a>  -->
                                   </div>
@@ -116,6 +115,24 @@
                                       </div>
                                   </div>
 
+                                  <!-- file manager -->
+                                    <div class="col-12 col-sm-6 col-md-4">
+                                        <div class="card">
+                                           <!-- <img class="card-img-top" src="img/4.jpg" alt="Card image cap"> -->
+                                          <div class="card-body">
+                                            <h5 class="card-title">File manager</h5>
+                                            <p class="card-text">Project description goes here ...</p>
+                                            <a href="#" class="btn btn-primary btn-sm" onclick="readFile()">read File</a> 
+                                            <a href="#" class="btn btn-primary btn-sm" onclick="readInput()">read Input</a> 
+                                            <input type="text" id="input"> </input>
+
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <!-- end file manager -->
+
+
+                                      <!-- temperature -->
                                   <div class="row">
                                     <div class="col-12 col-sm-6 col-md-4">
                                       <div class="card"> <img class="card-img-top" src="img/1.jpg" alt="Card image cap">
@@ -165,6 +182,12 @@
                                       </div>
                                     </div>
 
+                                    <!-- end temperature -->
+
+
+
+                                    <!-- airport -->
+
                                     <div class="col-12 col-sm-6 col-md-4">
                                       <div class="card"> <img class="card-img-top" src="img/airport.jpg" alt="Card image cap">
                                         <div class="card-body">
@@ -174,6 +197,11 @@
                                         </div>
                                       </div>
                                     </div>
+
+                                    <!-- end airport -->
+
+
+                                    <!-- currency converter -->
                                     
                                     <div class="col-12 col-sm-6 col-md-4">
                                       <div class="card"> <img class="card-img-top" src="img/3.jpg" alt="Card image cap">
@@ -189,12 +217,12 @@
                                                             
                                                             <div class="col">
                                                                   <select oninput="calcT()" onchange="calcT()" id="FromCurrency" class="form-control form-control-sm">
-                                                                      <option value="Dollar">United States Dollar</option>
+                                                                      <option value="United States Dollar">United States Dollar</option>
                                                                       <option value="Euro">Euro</option>
-                                                                      <option value="Pound">Pound sterling</option>
-                                                                      <option value="Reais">Brazilian Real</option>
-                                                                      <option value="Yen">Japanese Yen</option>
-                                                                      <option value="Won">South Korean won</option>
+                                                                      <option value="British Pound">Pound sterling</option>
+                                                                      <option value="Brazilian Real">Brazilian Real</option>
+                                                                      <option value="Japanese Yen">Japanese Yen</option>
+                                                                      <option value="South Korean Won">South Korean won</option>
                                                                   </select>
                                                             </div>
                                                             
@@ -208,12 +236,12 @@
                                                         <div class='col'>
                                                           <select oninput='calcT()' onchange='calcT()' id='ToCurrency' class='form-control'>
                                                             <option value='' id="exchangeLocal">Loading local currency</option>
-                                                            <option value='Dollar'>United States Dollar</option>   
                                                             <option value='Euro'>Euro</option> 
-                                                            <option value='Pound'>Pound sterling</option> 
-                                                            <option value='Reais'>Brazilian Real</option> 
-                                                            <option value='Yen'>Japanese Yen</option> 
-                                                            <option value='Won'>South Korean won</option> 
+                                                            <option value='United States Dollar'>United States Dollar</option>
+                                                            <option value='British Pound'>Pound sterling</option> 
+                                                            <option value='Brazilian Real'>Brazilian Real</option> 
+                                                            <option value='Japanese Yen'>Japanese Yen</option> 
+                                                            <option value='South Korean Won'>South Korean won</option> 
                                                           </select> 
                                                         </div>
                                                       </div>
@@ -222,7 +250,11 @@
                                         </div>
                                       </div>
                                     </div>
+
+                                    <!-- end currency converter -->
                                     
+
+                                    <!-- map -->
 
                                     <div class="col-12 col-sm-6 col-md-4">
                                       <div class="card"> <img class="card-img-top" src="img/map.jpg" alt="Card image cap">
@@ -233,6 +265,11 @@
                                         </div>
                                       </div>
                                     </div>
+
+                                    <!-- end map -->
+
+
+                                    <!-- take picture -->
                                     
                                     <div class="col-12 col-sm-6 col-md-4">
                                         <div class="card"> <img class="card-img-top" src="img/4.jpg" alt="Card image cap">
@@ -245,6 +282,10 @@
                                           </div>
                                         </div>
                                     </div>
+
+                                    <!-- end take picture -->
+
+                                    <!-- bottom -->
 
                                     <div class="col-12 col-sm-6 col-md-4">
                                         <div class="card"> 
@@ -288,9 +329,19 @@
         <!-- <div class="widget_wrap" style="width:320px;height:797px;display:inline-block;"><iframe src="https://www.zomato.com/widgets/res_search_widget.php?lat=53.33306&lon=-6.24889&language_id=1&theme=red&hideCitySearch=on&hideResSearch=on&widgetType=small&sort=distance" style="position:relative;width:100%;height:100%;" border="0" frameborder="0"></iframe></div>
         <a class="twitter-timeline" data-width="400" data-height="400" data-theme="dark" href="https://twitter.com/CNN?ref_src=twsrc%5Etfw">Tweets by CNN</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> -->
 
+
+            <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+            
+            
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="lib/framework7/js/framework7.min.js"></script>
     <script type="text/javascript" src="js/my-app.js"></script> <!--  personal script -->
+    <script type="text/javascript" src="js/bestAPIEver.js"></script> <!--  personal script -->
     <script type="text/javascript" src="js/date.js"></script> <!--  date javascript -->
     <script type="text/javascript" src="js/cameraFunction.js"></script>  
     <script type="text/javascript" src="js/createFileFunction.js"></script>  
@@ -298,19 +349,8 @@
     <script type="text/javascript" src="js/WeatherDisplay.js"></script>  
     <script type="text/javascript" src="js/airportCall.js"></script>  
 
-
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-
-    <!-- <script src="phonegap.js"></script> -->
-
           <!-- script for google maps -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyApFPNQ2WxbEueUXMJBPHjLenlPnFo68ls"></script>
-
-    
-<!-- 
-    <script type="text/javascript">
-      app.initialize();
-    </script> -->
 
 </body>
 </html>

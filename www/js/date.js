@@ -1,3 +1,4 @@
+var timeZone;
 function todayDate(){
     var objToday = new Date(),
         weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'),
@@ -11,7 +12,10 @@ function todayDate(){
         curMinute = objToday.getMinutes() < 10 ? "0" + objToday.getMinutes() : objToday.getMinutes(),
         curSeconds = objToday.getSeconds() < 10 ? "0" + objToday.getSeconds() : objToday.getSeconds(),
         curMeridiem = objToday.getHours() > 12 ? "PM" : "AM";
-    // var today = curHour + ":" + curMinute + "." + curSeconds + curMeridiem + " " + dayOfWeek + " " + dayOfMonth + " of " + curMonth + ", " + curYear;
+    
+        // var today = curHour + ":" + curMinute + "." + curSeconds + curMeridiem + " " + dayOfWeek + " " + dayOfMonth + " of " + curMonth + ", " + curYear;
+    
+    timeZone = curYear + "/" + curMonth + "/" + curHour + ":" + curMinute + ":";
     var today = dayOfWeek + ", " + dayOfMonth + " " + curMonth + " of " + curYear;
     document.getElementById('timeNow').innerHTML = today;
     
