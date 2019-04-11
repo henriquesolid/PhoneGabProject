@@ -48,7 +48,8 @@
     <!-- Left panel with reveal effect-->
     <div class="panel panel-right panel-reveal">
         <div class="content-block">
-            <p>Visited places</p>
+            <p>Visited countries</p>
+            <p id="writeSucess">
 
 
 
@@ -101,7 +102,7 @@
                                 <div class="jumbotron jumbotron-fluid bg-light">
                                   <div class="container text-center">
                                      <img class="ratio img-responsive" id="flag"></img>
-                                    <h2 id="welcome" onclick="theBestAPI()">Welcome...</h2>
+                                    <h2 id="welcome" onclick="capitalClick()">Welcome...</h2>
                                     <p class="lead">Here you will find priceless information about this country.</p>
                                     <!-- <a class="btn social-icons" href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a> <a class="btn social-icons" href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a> <a class="btn social-icons" href="#"><i class="fa fa-behance" aria-hidden="true"></i></a> <a class="btn social-icons" href="#"><i class="fa fa-500px" aria-hidden="true"></i></a> <a class="btn social-icons" href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a>  -->
                                   </div>
@@ -114,26 +115,6 @@
                                         <h4 class="section-title" id="timeNow"></h4>
                                       </div>
                                   </div>
-
-                                  <!-- file manager -->
-                                    <div class="col-12 col-sm-6 col-md-4">
-                                        <div class="card">
-                                           <!-- <img class="card-img-top" src="img/4.jpg" alt="Card image cap"> -->
-                                          <div class="card-body">
-                                            <h5 class="card-title">File manager!</h5>
-                                            <p class="card-text">
-                                              
-                                              <input type="text" id="tripFeedback" class="form-control form-control-sm"> </input>
-
-                                            </p>
-
-                                              <a href="#" class="btn btn-primary btn-sm" onclick="readFile()">read File</a> 
-                                              <a href="#" class="btn btn-primary btn-sm" onclick="readInput()">read Input</a> <br>
-
-                                          </div>
-                                        </div>
-                                      </div>
-                                      <!-- end file manager -->
 
 
                                       <!-- temperature -->
@@ -288,6 +269,47 @@
                                     </div>
 
                                     <!-- end take picture -->
+
+
+                                    
+                                  <!-- file manager -->
+                                  <div class="col-12 col-sm-6 col-md-4">
+                                      <div class="card">
+                                         <!-- <img class="card-img-top" src="img/4.jpg" alt="Card image cap"> -->
+                                        <div class="card-body">
+                                          <h5 class="card-title">Trip Feedback!</h5>
+                                          <p class="card-text">
+                                            <div class="col">
+                                                
+                                                <div class="row">
+                                                    <label>Write your feedback:</label>
+                                                    <input type="text" id="tripFeedback" class="form-control form-control-sm" placeholder="Feedback"> </input>
+                                                </div>
+
+                                              <div class="row">
+                                                  <label>Select a place to give a feedback.</label>
+                                                  <select oninput="" onchange="" id="placeVisited" class="form-control">
+                                                      <option value="country" id="countrySelect">Loading country</option>
+                                                      <option value="city" id="citySelect">Loading city</option>
+                                                      <option value="neighbor" id="neighborSelect">Loading neighbor</option>
+                                                  </select>
+                                              </div>
+                                            </div>
+                                            <div class="card-text">
+                                              <br>
+                                                <a href="#" class="btn btn-primary btn-sm" onclick="readInput()">Add feedback!</a>
+                                            </div>
+
+                                            </p><p id="writeAlert" class="open-panel"></p>
+                                          </p>
+
+                                            <!-- <a href="#" class="btn btn-primary btn-sm" onclick="readFile()">View location</a>  -->
+
+
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <!-- end file manager -->
 
                                     <!-- bottom -->
 

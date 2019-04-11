@@ -7,7 +7,7 @@ function CreateFileFunction(){
 function fileSystemCallback(fs){
 
     // Name of the file I want to create
-    var fileToCreate = "newPersistentFile.txt";
+    var fileToCreate = "visitedPlaces.txt";
 
     // Opening/creating the file
     fs.root.getFile(fileToCreate, fileSystemOptionals, getFileCallback, onError);
@@ -26,7 +26,7 @@ function getFileCallback(fileEntry){
 }
 
 function readInput(){
-    textToWrite = document.getElementById('input').value;
+    textToWrite = document.getElementById('tripFeedback').value;
 
     writeFile(textToWrite);
 
