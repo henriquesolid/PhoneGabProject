@@ -40,8 +40,8 @@ function writeFile(newText) {
     
     // window.alert("country " + country + " city " + city + " neighbor " + neighbor);
     var placeVisited = document.getElementById('placeVisited').value;
-    window.alert("placeVisited: " + placeVisited);
-    contentGlobal = contentGlobal + "Place: " + country + "<br>Your feedback: " + newText + "<br>";
+    // window.alert("placeVisited: " + placeVisited);
+    contentGlobal = contentGlobal + "Place: " + placeVisited + "<br>Your feedback: " + newText + "<br>";
     // contentGlobal = contentGlobal + "Country: " + country + "<br>Your feedback: " + newText + "<br>";
     // contentGlobal = newText;
 

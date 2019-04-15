@@ -7,7 +7,7 @@ function CreateFileFunction(){
 function fileSystemCallback(fs){
 
     // Name of the file I want to create
-    var fileToCreate = "visitedPlaces.txt";
+    var fileToCreate = "visitedPlace.txt";
 
     // Opening/creating the file
     fs.root.getFile(fileToCreate, fileSystemOptionals, getFileCallback, onError);
@@ -35,9 +35,17 @@ function readInput(){
 // Let's write some files
 function writeFile(newText) {
 
-    readFile();
+    // readFile();
 
-    contentGlobal = contentGlobal + newText;
+    
+    // window.alert("country " + country + " city " + city + " neighbor " + neighbor);
+    var placeVisited = document.getElementById('placeVisited').value;
+    // window.alert("placeVisited: " + placeVisited);
+    contentGlobal = contentGlobal + "Place: " + placeVisited + "<br>Your feedback: " + newText + "<br>";
+    // contentGlobal = contentGlobal + "Country: " + country + "<br>Your feedback: " + newText + "<br>";
+    // contentGlobal = newText;
+
+
 
     var dataObj = new Blob([contentGlobal], { type: 'text/plain' });
 
@@ -53,11 +61,16 @@ function writeFile(newText) {
         fileWriter.write(dataObj);
 
         fileWriter.onwriteend = function() {
-            console.log("Successful file write...");
+            // console.log("Successful file write...");
+            document.getElementById('writeSucess').innerHTML = contentGlobal;
+            document.getElementById('writeAlert').innerHTML = "<img src='img/logo.svg' width='20' height='20'> <br>This place has been saved at the visited places panel.<br>Click here to visit this section.";
+            
         };
 
         fileWriter.onerror = function (e) {
-            console.log("Failed file write: " + e.toString());
+            // console.log("Failed file write: " + e.toString());
+            document.getElementById('writeAlert').innerHTML = "error...";
+
         };
 
     });
@@ -65,6 +78,7 @@ function writeFile(newText) {
 
 // Let's read some files
 function readFile() {
+    // window.alert("readfile called");
 
     // Get the file from the file entry
     fileEntryGlobal.file(function (file) {
@@ -74,8 +88,13 @@ function readFile() {
     
         reader.onloadend = function() {
 
-            console.log("Successful file read: " + this.result);
-            console.log("file path: " + fileEntryGlobal.fullPath);
+            // window.alert("Successful file read: " + this.result);
+            
+
+            // console.log("Successful file read: " + this.result);
+            // window.alert("file path: " + fileEntryGlobal.fullPath);
+
+            // console.log("file path: " + fileEntryGlobal.fullPath);
             contentGlobal = this.result;
             
 
@@ -87,5 +106,6 @@ function readFile() {
 
 
 function onError(msg){
-    console.log(msg);
+    // console.log(msg);
+    window.alert(msg);
 }

@@ -58,6 +58,8 @@ function displayWeather(){
         document.getElementById('condition').innerHTML = condition; 
         document.getElementById('temperature').innerHTML = temperature; 
         document.getElementById('neighbor').innerHTML = neighbor;
+        document.getElementById('neighborSelect').innerHTML = neighbor;
+        document.getElementById('neighborSelect').value = neighbor;
         document.getElementById('temp_max').innerHTML = temp_max; 
         document.getElementById('temp_min').innerHTML = temp_min; 
         document.getElementById('windspeed').innerHTML = windspeed; 

@@ -118,10 +118,10 @@ var lat;
 var lon;
 function geoCallback(position){
      // console.log("geoCallback called");
-    // lat =   position.coords.latitude; //latitude vital for the app
-    lat = 35.1595;
-    // lon =  position.coords.longitude; //longitude vital for the app
-    lon = 126.8526;
+    lat =   position.coords.latitude; //latitude vital for the app
+    // lat = 35.1595;
+    lon =  position.coords.longitude; //longitude vital for the app
+    // lon = 126.8526;
 
     opencageAPI();  //get city, country and more
     displayWeather(); //file WeatherDisplay.js

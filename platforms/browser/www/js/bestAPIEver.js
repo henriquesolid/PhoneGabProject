@@ -1,14 +1,14 @@
 // https://restcountries.eu/rest/v2/name/brazil#
-var alpha2Code;
-var alpha3Code;
-
+var capital;
 function theBestAPI(){
     console.log("theBestAPI called");
     var http = new XMLHttpRequest();
 
-    const url = 'https://restcountries.eu/rest/v2/name/Slovak';
-    console.log("seu poha");
-    console.log(url);
+    // const url = 'https://restcountries.eu/rest/v2/name/Slovak';
+    const url = 'https://restcountries.eu/rest/v2/name/' + country;
+    window.alert(url);
+
+    // console.log(url);
     
     http.open("GET", url);
 
@@ -17,17 +17,14 @@ function theBestAPI(){
         
         var response = http.responseText;
         response = JSON.parse(response);
-        console.log(response);
+        // console.log(response);
         
-        alpha2Code = response[0].alpha2Code;
-        alpha3Code = response[0].alpha3Code;
-        console.log("alpha2Code" + alpha2Code + "   alpha3Code" + alpha3Code);
-        //  temp_max = temp_max + "&#176 degree";
-        //  temp_min =  response.main.temp_min;
-        // document.getElementById('pressure').innerHTML = pressure; 
+        var alpha2Code = response[0].alpha2Code;
+        var alpha3Code = response[0].alpha3Code;
+        capital = response[0].capital
 
         }
     }; 
     http.send();
-    vamosver();
 }
+function capitalClick(){window.alert("Capital: " + capital);}

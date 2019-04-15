@@ -15,7 +15,6 @@ var mainView = myApp.addView('.view-main', {
 $$(document).on('deviceready', function() {
     console.log("Device is ready!");
     getLocation();
-    CreateFileFunction();
 });
 
 
@@ -119,10 +118,10 @@ var lat;
 var lon;
 function geoCallback(position){
      // console.log("geoCallback called");
-    // lat =   position.coords.latitude; //latitude vital for the app
-    lat = -13.163068;
-    // lon =  position.coords.longitude; //longitude vital for the app
-    lon = -72.545128;
+    lat =   position.coords.latitude; //latitude vital for the app
+    // lat = 35.1595;
+    lon =  position.coords.longitude; //longitude vital for the app
+    // lon = 126.8526;
 
     opencageAPI();  //get city, country and more
     displayWeather(); //file WeatherDisplay.js
@@ -170,12 +169,14 @@ function refreshMap(){
 var currency;
 var welcome;
 var localCurrency;
+var country;
+var city;
 function opencageAPI(){
      // console.log("opencageAPI called");
     var http = new XMLHttpRequest();
     // const url = 'https://api.opencagedata.com/geocode/v1/json?q=53.3458+-6.2575&key=9614ccc2a3db467aa291f7aaea02676c';
     const url = 'https://api.opencagedata.com/geocode/v1/json?q='+lat+'+'+lon+'&key=9614ccc2a3db467aa291f7aaea02676c';
-    console.log(url);
+    // console.log(url);
     http.open("GET", url);
 
     http.onreadystatechange = function () {
@@ -183,10 +184,10 @@ function opencageAPI(){
             
         var response = http.responseText;
         var responseJSON = JSON.parse(response);
-        console.log(responseJSON);
+        // console.log(responseJSON);
 
-        var city =  responseJSON.results[0].components.city;
-        var country =  responseJSON.results[0].components.country;
+        city =  responseJSON.results[0].components.city;
+        country =  responseJSON.results[0].components.country;
         currency =  responseJSON.results[0].annotations.currency.name;
         var callingcode = responseJSON.results[0].annotations.callingcode;
        
@@ -197,7 +198,17 @@ function opencageAPI(){
         document.getElementById('welcome').innerHTML = welcome; 
         document.getElementById('localCurrency').innerHTML = localCurrency; 
 
+        document.getElementById('countrySelect').innerHTML = country;
+        document.getElementById('countrySelect').value = country;
+
+        document.getElementById('citySelect').innerHTML = city;
+        document.getElementById('citySelect').value = city;
+
+
         currencyExchange(); //file exchangemoney.js
+        CreateFileFunction(); //call this function here because it uses the variable country
+        theBestAPI();
+
         }
     };
     http.send();
