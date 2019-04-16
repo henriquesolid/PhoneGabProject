@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="ie.enclave" version="1.0.1">
+    <name>TravellerHelper</name>
+    <description>
+        An awesome App for travellers!.
+    </description>
+    <author email="rricardohenriquesilva@gmail.com" href="https://www.linkedin.com/in/ricardo-silva-dublin/">
+        My linkedin
+    </author>
+    <content src="index.html" />
+    <access origin="*" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-intent href="tel:*" />
+    <allow-intent href="sms:*" />
+    <allow-intent href="mailto:*" />
+    <allow-intent href="geo:*" />
+    <platform name="android">
+        <preference name="AndroidLaunchMode" value="singleTop" />
+        <preference name="android-minSdkVersion" value="19" />
+        <preference name="android-targetSdkVersion" value="19" />
+        <icon src="www/img/web_hi_res_512.png" />
+        <allow-intent href="market:*" />
+    </platform>
+    <preference name="DisallowOverscroll" value="true" />
+    <plugin name="cordova-plugin-whitelist" spec="~1.2.0" />
+    <plugin name="cordova-plugin-console" spec="~1.0.1" />
+    <plugin name="cordova-plugin-statusbar" spec="~1.0.1" />
+</widget>
