@@ -1,4 +1,5 @@
 var timeZone;
+var timemachineDate;
 function todayDate(){
     var objToday = new Date(),
         weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'),
@@ -17,6 +18,7 @@ function todayDate(){
     
     timeZone = curYear + "/" + curMonth + "/" + curHour + ":" + curMinute + ":";
     var today = dayOfWeek + ", " + dayOfMonth + " " + curMonth + " of " + curYear;
+    timemachineDate = dayOfMonth + "/" + curMonth; 
     document.getElementById('timeNow').innerHTML = today;
     
     }

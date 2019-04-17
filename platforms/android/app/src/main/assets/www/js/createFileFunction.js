@@ -17,6 +17,7 @@ var fileSystemOptionals = { create: true, exclusive: false };
 
 var fileEntryGlobal;
 var contentGlobal = "";
+var contentGlobal2 = "";
 
 function getFileCallback(fileEntry){
 
@@ -102,10 +103,41 @@ function readFile() {
     }, onError);
 }
 
+function timeMAchine(){
+    console.log("timemachine called");
+
+    var timemachineVAR;
+    // document.getElementById('timemachineDIV').innerHTML = timemachineVAR;
+    contentGlobal2 = contentGlobal2 + city +", " + country + " at " + timemachineDate + " " + temperature + "<br>";
+  
 
 
 
-function onError(msg){
-    // console.log(msg);
-    window.alert(msg);
+    var dataObj = new Blob([contentGlobal2], { type: 'text/plain' });
+
+    // Create a FileWriter object for our FileEntry (log.txt).
+    fileEntryGlobal.createWriter(function (fileWriter) {
+
+        // If data object is not passed in,
+        // create a new Blob instead.
+        if (!dataObj) {
+            dataObj = new Blob(['Error'], { type: 'text/plain' });
+        }
+
+        fileWriter.write(dataObj);
+
+        fileWriter.onwriteend = function() {
+            // console.log("Successful file write...");
+            document.getElementById('timemachineDIV').innerHTML = contentGlobal2;
+            document.getElementById('writeAlert2').innerHTML = "This place has been saved.";
+            
+        };
+
+        fileWriter.onerror = function (e) {
+            // console.log("Failed file write: " + e.toString());
+            document.getElementById('writeAlert2').innerHTML = "error...";
+
+        };
+
+    });
 }

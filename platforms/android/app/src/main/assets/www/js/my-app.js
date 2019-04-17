@@ -13,7 +13,6 @@ var mainView = myApp.addView('.view-main', {
 
 // Handle Cordova Device Ready Event
 $$(document).on('deviceready', function() {
-    console.log("Device is ready!");
     getLocation();
 });
 
@@ -242,7 +241,6 @@ function shake(){
 //function to catch erros
 function onError(message){
     // console.log("onError called");
-    //  console.log(message);
     alert('Failed because: ' + message);
 }
 //end catch error function

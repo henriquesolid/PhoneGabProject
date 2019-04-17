@@ -1,0 +1,33 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {}
+    },
+    "installed_plugins": {
+        "cordova-plugin-camera": {
+            "PACKAGE_NAME": "ie.enclave"
+        },
+        "cordova-plugin-console": {
+            "PACKAGE_NAME": "ie.enclave"
+        },
+        "cordova-plugin-file": {
+            "PACKAGE_NAME": "ie.enclave"
+        },
+        "cordova-plugin-geolocation": {
+            "PACKAGE_NAME": "ie.enclave"
+        },
+        "cordova-plugin-statusbar": {
+            "PACKAGE_NAME": "ie.enclave"
+        },
+        "cordova-plugin-vibration": {
+            "PACKAGE_NAME": "ie.enclave"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "ie.enclave"
+        }
+    },
+    "dependent_plugins": {}
+}

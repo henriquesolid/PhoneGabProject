@@ -7,6 +7,9 @@
     "files": {}
   },
   "installed_plugins": {
+    "cordova-plugin-camera": {
+      "PACKAGE_NAME": "ie.enclave"
+    },
     "cordova-plugin-console": {
       "PACKAGE_NAME": "ie.enclave"
     },
@@ -17,6 +20,9 @@
       "PACKAGE_NAME": "ie.enclave"
     },
     "cordova-plugin-statusbar": {
+      "PACKAGE_NAME": "ie.enclave"
+    },
+    "cordova-plugin-vibration": {
       "PACKAGE_NAME": "ie.enclave"
     },
     "cordova-plugin-whitelist": {
