@@ -13,6 +13,7 @@ var mainView = myApp.addView('.view-main', {
 
 // Handle Cordova Device Ready Event
 $$(document).on('deviceready', function() {
+    window.alert("Hi there!");
     getLocation();
 });
 
@@ -42,70 +43,6 @@ $$(document).on('pageInit', '.page[data-page="about"]', function (e) {
     myApp.alert('Here comes About page');
 })
 
-
-
-
-//***********start device diagnotiscs */
-
-function vamosver(){
-
-    var today = new Date().toLocaleDateString('ko-KR', {
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit'
-    })
-    console.log(today);
-
-}
-
-//***********finish device diagnotiscs */
-
-
-
-
-
-
-
-
-
-
-
-
-// // starting device accelaration/motion
-
-// // THIS IS THE FUNCTION THAT WILL READ THE ACCELEROMETER
-// var watchID = null;
-
-// function startWatch(){
-
-//     // Notice that the function takes two callbacks (accCallback and onError) and
-//     // a JSON object (options)
-//     watchID = navigator.accelerometer.watchAcceleration(accCallback, onError, options); 
-//     // console.log("startwatch function started");
-
-// }
-
-// // accCallback. This is the function in charge of 
-// // displayiing the acceleration on the front end
-
-// function accCallback(acceleration){
-
-//     // var element = document.getElementById('accelerometer');
-// 	// element.innerHTML = 'Acceleration X: ' + acceleration.x + '<br>' +
-// 	// 		      'Acceleration Y: ' + acceleration.y + '<br>' +
-// 	// 		      'Acceleration Z: ' + acceleration.z + '<br>' +
-// 	// 		      'Timestamp: ' + acceleration.timestamp + '<br>';
-
-// }
-
-// // JSON object
-// //the frequency that the acceleration updates
-// var options = {
-//     frequency: 3000
-// }
-// // end device accelaration/motion
 
 //getLocation 
 function getLocation(){
@@ -231,7 +168,7 @@ function printFlag(){
 //function shake device
 function shake(){
     navigator.vibrate(1000);
-     // console.log("shaking working!");
+     window.alert("Awesome App!");
 }
 //end shake device function
 

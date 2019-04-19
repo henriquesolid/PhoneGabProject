@@ -106,13 +106,8 @@ function readFile() {
 function timeMAchine(){
     console.log("timemachine called");
 
-    var timemachineVAR;
-    // document.getElementById('timemachineDIV').innerHTML = timemachineVAR;
     contentGlobal2 = contentGlobal2 + city +", " + country + " at " + timemachineDate + " " + temperature + "<br>";
   
-
-
-
     var dataObj = new Blob([contentGlobal2], { type: 'text/plain' });
 
     // Create a FileWriter object for our FileEntry (log.txt).
@@ -129,7 +124,7 @@ function timeMAchine(){
         fileWriter.onwriteend = function() {
             // console.log("Successful file write...");
             document.getElementById('timemachineDIV').innerHTML = contentGlobal2;
-            document.getElementById('writeAlert2').innerHTML = "This place has been saved.";
+            document.getElementById('writeAlert2').innerHTML = "This place has been saved!";
             
         };
 

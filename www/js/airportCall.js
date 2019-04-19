@@ -8,7 +8,6 @@ function nearestAirport(){
      // console.log("nearestAirport called");
     
      var http = new XMLHttpRequest();
-    //const url = 'http://iatacodes.org/api/v6/nearby?api_key=e6d5fae9-f7b9-4d1a-a219-08a0a5447427&lat=53.3458902&lng=-6.2575&distance=100';
     //  const url = 'http://iatacodes.org/api/v6/nearby?api_key=e6d5fae9-f7b9-4d1a-a219-08a0a5447427&lat='+lat+'&'+'lng='+lon+'&distance=100';
       const url = 'http://iatacodes.org/api/v6/nearby?api_key=YOUR-API-KEY&lat='+lat+'&'+'lng='+lon+'&distance=100';
     //  console.log("url do airport");
@@ -22,9 +21,6 @@ function nearestAirport(){
         response = JSON.parse(response);
         // console.log(response);
 
-        // var responseLength =  response.response[0];
-        // console.log("responseLength");
-        // console.log(responseLength);
         if(response != "undefined"){
             
 

@@ -72,9 +72,6 @@ function displayWeather(){
         //call the printflag function as the flag URL needs the variable countrycode
         printFlag();
 
-        //call the function create file after get the neighbor name as the function use this variable
-        // CreateFile();
-
         }
     }; 
     http.send();
