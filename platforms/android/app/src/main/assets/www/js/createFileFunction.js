@@ -36,7 +36,7 @@ function readInput(){
 // Let's write some files
 function writeFile(newText) {
 
-    // readFile();
+    readFile();
 
     
     // window.alert("country " + country + " city " + city + " neighbor " + neighbor);
@@ -68,7 +68,7 @@ function writeFile(newText) {
             
         };
 
-        fileWriter.onerror = function (e) {
+        fileWriter.onerror = function () {
             // console.log("Failed file write: " + e.toString());
             document.getElementById('writeAlert').innerHTML = "error...";
 
